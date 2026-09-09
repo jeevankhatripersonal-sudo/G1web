@@ -1,0 +1,1668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Jeevan Khatri — Audio Engineer & Music Producer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink:    #0D0C0A;
+  --lift:   #161412;
+  --ash:    #252220;
+  --muted:  #5A5450;
+  --warm:   #8A8078;
+  --sand:   #C2AA8A;
+  --bone:   #E6DDD0;
+  --gold:   #B6903E;
+  --white:  #F4EFE8;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--ink);
+  color: var(--bone);
+  font-family: 'Outfit', sans-serif;
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ── GRID TEXTURE on ink sections ── */
+.bg-ink {
+  background-color: var(--ink);
+  background-image:
+    linear-gradient(rgba(255,255,255,0.024) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.024) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* ── LIFTED sections — floating window cards like Basslila ── */
+.bg-lift {
+  background-color: var(--lift);
+  background-image:
+    linear-gradient(rgba(255,255,255,0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.055) 1px, transparent 1px);
+  background-size: 28px 28px;
+  position: relative;
+  /* Float as a window: margin from edges, rounded corners, shadow */
+  margin: 0 32px;
+  border-radius: 24px;
+  box-shadow: 0 8px 48px rgba(0,0,0,0.45), 0 2px 12px rgba(0,0,0,0.3);
+  overflow: hidden;
+}
+
+/* Typography */
+.serif {
+  font-family: 'Outfit', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  color: var(--sand);
+}
+
+.section-heading {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 500;
+  font-size: clamp(36px, 4vw, 58px);
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  color: var(--white);
+  margin-bottom: 12px;
+}
+/* When heading is directly followed by content (no subheading) */
+.section-heading.no-sub { margin-bottom: 40px; }
+/* Gold accent lines */
+.section-label::after,
+.section-label.center::before {
+  background: var(--gold);
+  opacity: 0.5;
+}
+
+.section-label {
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+}
+.section-label::before {
+  content: '—';
+  color: var(--gold);
+  font-size: 13px;
+  font-weight: 300;
+  letter-spacing: 0;
+}
+.section-label::after { display: none; }
+.section-label.center { justify-content: center; }
+.section-heading.center { text-align: center; }
+.section-intro.center { text-align: center; margin-left: auto; margin-right: auto; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0 48px;
+  height: 64px;
+  background: rgba(13,12,10,0.96);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  transition: border-color 0.4s;
+}
+nav.scrolled { border-bottom-color: rgba(255,255,255,0.07); }
+.nav-logo {
+  font-size: 14px; font-weight: 500; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--bone); text-decoration: none; flex-shrink: 0;
+}
+.nav-right { display: flex; align-items: center; gap: 28px; }
+.nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
+.nav-links a {
+  font-size: 11px; letter-spacing: 0.13em; text-transform: uppercase;
+  color: var(--warm); text-decoration: none; transition: color 0.25s;
+  font-weight: 400; white-space: nowrap;
+}
+.nav-links a:hover { color: var(--gold); }
+.nav-cta {
+  background: var(--gold); color: var(--ink);
+  padding: 9px 20px; font-size: 11px; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  text-decoration: none; transition: background 0.25s; white-space: nowrap; flex-shrink: 0;
+}
+.nav-cta:hover { background: var(--sand); }
+
+/* ── HERO ── */
+.hero {
+  height: 100vh; min-height: 640px;
+  display: grid; grid-template-columns: 50% 50%;
+  position: relative; overflow: hidden;
+  background-color: var(--ink);
+}
+.hero-photo { position: relative; overflow: hidden; }
+.hero-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 52% 68%; display: block; }
+.hero-photo::after {
+  content: ''; position: absolute; top: 0; right: 0; bottom: 0; width: 55%;
+  background: linear-gradient(to right, transparent, var(--ink)); pointer-events: none;
+}
+.hero-photo::before {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 30%;
+  background: linear-gradient(to top, var(--ink), transparent); pointer-events: none; z-index: 1;
+}
+.hero-content {
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 100px 64px 80px 48px; position: relative; z-index: 1;
+}
+.hero-eyebrow { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; font-weight: 400; }
+.hero-name {
+  font-family: 'Outfit', sans-serif; font-weight: 500;
+  font-size: clamp(60px, 7vw, 100px); letter-spacing: -0.03em; line-height: 1.0;
+  color: var(--white); margin-bottom: 4px;
+}
+.hero-name-sub {
+  font-family: 'Outfit', sans-serif; font-style: normal; font-weight: 500;
+  font-size: clamp(60px, 7vw, 100px); line-height: 1.0; color: var(--sand); margin-bottom: 36px;
+}
+.hero-tagline {
+  font-size: 14px; color: var(--bone); line-height: 1.9; max-width: 360px;
+  margin-bottom: 48px; padding-left: 18px; border-left: 1px solid var(--ash);
+}
+.hero-actions { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; margin-bottom: 56px; }
+.btn {
+  display: inline-block; font-family: 'Outfit', sans-serif; font-size: 11px;
+  font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
+  text-decoration: none; transition: all 0.25s; cursor: pointer; border: none;
+}
+.btn-gold { background: var(--gold); color: var(--ink); padding: 14px 32px; }
+.btn-gold:hover { background: var(--sand); }
+.btn-ghost { color: var(--warm); border-bottom: 1px solid var(--ash); padding-bottom: 3px; background: transparent; }
+.btn-ghost:hover { color: var(--bone); border-color: var(--warm); }
+.hero-scroll { display: flex; align-items: center; gap: 12px; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+.scroll-line { width: 36px; height: 1px; background: var(--ash); }
+
+/* ── SECTION BASE ── */
+.section { padding: 80px 48px 80px; }
+.section-ink { padding: 80px 48px 80px; }
+
+.section-lifted {
+  padding: 72px 48px 80px;
+  margin: 48px 32px;
+  border-radius: 24px;
+  position: relative;
+}
+
+/* ── SECTION INTRO PARAGRAPHS ── */
+.section-intro {
+  font-size: 14px; color: var(--warm); line-height: 1.85; max-width: 580px; margin-bottom: 32px;
+}
+.section-sub {
+  font-size: 14px; color: var(--bone); opacity: 0.8; line-height: 1.7;
+  margin-top: 0; margin-bottom: 40px; max-width: 560px;
+}
+.section-sub.center { text-align: center; margin-left: auto; margin-right: auto; }
+
+/* ── SPOTIFY / BEATS full-bleed embed sections ── */
+
+/* ── BEFORE & AFTER ── */
+/* Desktop BA Slider */
+.ba-desktop-slider {
+  max-width: 1320px;
+  margin: 0 auto;
+  position: relative;
+}
+.ba-desktop-viewport {
+  overflow: hidden;
+}
+.ba-grid {
+  display: grid;
+  grid-template-columns: repeat(6, calc(33.333% - 16px));
+  gap: 24px;
+  transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+}
+.ba-desktop-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 32px;
+}
+.ba-desktop-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--ash); cursor: pointer;
+  transition: background 0.25s, transform 0.25s;
+}
+.ba-desktop-dot.active { background: var(--gold); transform: scale(1.3); }
+.ba-desktop-arrow {
+  width: 44px; height: 44px; border-radius: 50%;
+  border: 1px solid var(--ash); background: transparent;
+  color: var(--bone); font-size: 18px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: border-color 0.25s, background 0.25s;
+  flex-shrink: 0;
+}
+.ba-desktop-arrow:hover { border-color: var(--gold); background: rgba(182,144,62,0.1); }
+.ba-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: border-color 0.3s, background 0.3s;
+}
+.ba-card:hover { background: rgba(255,255,255,0.05); border-color: rgba(182,144,62,0.25); }
+.ba-video {
+  width: 100%;
+  aspect-ratio: 9/16;
+  background: #000;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.ba-play {
+  width: 48px; height: 48px; border-radius: 50%;
+  border: 1px solid rgba(182,144,62,0.4);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--gold); font-size: 16px; opacity: 0.6;
+}
+.ba-video video {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+.ba-vid-label { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); opacity: 0.5; }
+
+/* ── SERVICES ── */
+.services-label {
+  font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--gold); font-weight: 400; margin-bottom: 16px;
+}
+.services-row-heading {
+  font-family: 'Outfit', sans-serif; font-weight: 200;
+  font-size: clamp(24px, 2.4vw, 34px); font-weight: 500; letter-spacing: -0.01em; letter-spacing: -0.01em;
+  color: var(--white); margin-bottom: 32px;
+}
+.services-row { margin-bottom: 72px; }
+.services-row:last-child { margin-bottom: 0; }
+.services-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: 1320px;
+  margin: 0 auto;
+}
+.svc {
+  background: var(--ink);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  transition: border-color 0.3s, background 0.3s;
+}
+.svc:hover { background: #111009; border-color: rgba(182,144,62,0.25); }
+
+/* Video placeholder top */
+.svc-video {
+  width: 100%;
+  flex-shrink: 0;
+  line-height: 0;
+  position: relative;
+}
+.svc-video-inner {
+  width: 100%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 10px;
+  background: linear-gradient(160deg, #1c1916 0%, #0d0c0a 100%);
+}
+.svc-play {
+  width: 48px; height: 48px; border-radius: 50%;
+  border: 1px solid rgba(182,144,62,0.4);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--gold); font-size: 16px; opacity: 0.6;
+}
+.svc-video-label {
+  font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--muted); opacity: 0.5;
+}
+.svc-video iframe, .svc-video video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Badge ribbon */
+.svc-badge-wrap {
+  position: absolute; top: 14px; right: 14px;
+}
+.svc-badge {
+  font-size: 8px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--ink); background: var(--gold);
+  padding: 5px 11px; border-radius: 20px; white-space: nowrap; font-weight: 500;
+}
+
+/* Card body */
+.svc-body { padding: 28px 28px 32px; display: flex; flex-direction: column; flex: 1; background: var(--ink); }
+.svc-name {
+  font-family: 'Outfit', sans-serif; font-weight: 300;
+  font-size: 20px; color: var(--white); line-height: 1.2; margin-bottom: 10px;
+}
+.svc-desc { font-size: 13px; color: var(--bone); line-height: 1.85; margin-bottom: 28px; flex: 1; }
+.svc-list { list-style: none; margin-bottom: 24px; }
+.svc-list li {
+  font-size: 12px; color: var(--bone);
+  padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+  display: flex; align-items: center; gap: 10px;
+}
+.svc-list li::before { content: ''; width: 3px; height: 3px; background: var(--gold); border-radius: 50%; flex-shrink: 0; }
+
+.svc-link {
+  display: block; text-align: center;
+  font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--gold); text-decoration: none;
+  border: 1px solid rgba(182,144,62,0.35);
+  padding: 12px 20px; border-radius: 4px;
+  transition: background 0.25s, border-color 0.25s;
+  font-weight: 400;
+}
+.svc-link:hover { background: rgba(182,144,62,0.1); border-color: var(--gold); }
+
+/* ── ABOUT ── */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.about-body { font-size: 17px; color: var(--bone); opacity: 0.85; line-height: 1.9; }
+.about-body p + p { margin-top: 16px; }
+.about-pull { font-family: 'Outfit', sans-serif; font-style: normal; font-weight: 400; font-size: 19px; color: var(--sand); line-height: 1.55; margin: 28px 0; padding-left: 20px; border-left: 2px solid var(--gold); }
+.about-photo-wrap { display: flex; justify-content: center; align-items: center; }
+.about-photo { width: 64%; aspect-ratio: 3/4; overflow: hidden; position: relative; border-radius: 16px; }
+.about-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+.about-photo::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 15%; background: linear-gradient(to top, rgba(13,12,10,0.35), transparent); }
+
+/* ── GALLERY ── */
+.gallery-grid {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(0, 1.192696fr);
+  gap: 0; background: var(--ash);
+  border-radius: 0;
+}
+.g-item {
+  background: linear-gradient(145deg, #15120d, #090806);
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  isolation: isolate;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+  transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.38s ease;
+}
+.gallery-grid > .g-item { aspect-ratio: 2 / 3; }
+.gallery-stack { display: flex; flex-direction: column; }
+.gallery-stack .g-item { flex: 0 0 auto; }
+.g-item img {
+  width: 100%; height: auto;
+  display: block;
+  object-fit: contain; object-position: center;
+  transition: opacity 0.38s ease;
+}
+.g-item:hover {
+  transform: translate3d(0, -2px, 0) scale(1.035);
+  z-index: 4;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.38);
+}
+.g-item:hover img { opacity: 0.96; }
+
+/* ── REVIEWS CAROUSEL ── */
+.reviews-track-wrap {
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+}
+.reviews-track {
+  display: flex; gap: 20px;
+  animation: scrollReviews 90s linear infinite;
+  width: max-content;
+  will-change: transform;
+}
+.reviews-track:hover { animation-play-state: paused; }
+@keyframes scrollReviews {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* New review card — Basslila style */
+.review-card {
+  width: 280px;
+  flex-shrink: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.07);
+  background: #111009;
+  display: flex;
+  flex-direction: column;
+}
+.review-photo {
+  width: 100%;
+  aspect-ratio: 3/2.8;
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+}
+.review-photo img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center top;
+  display: block;
+  transition: transform 0.5s ease;
+}
+.review-card:hover .review-photo img { transform: scale(1.04); }
+.review-body {
+  padding: 18px 18px 20px;
+  display: flex; flex-direction: column; flex: 1;
+  background: #111009;
+}
+.review-name {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 500; font-size: 16px;
+  color: var(--white); margin-bottom: 10px;
+  line-height: 1.2;
+}
+.review-meta-row {
+  display: flex; align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+.review-stars {
+  color: var(--gold); font-size: 12px; letter-spacing: 2px;
+}
+.review-ig {
+  display: flex; flex-direction: column; align-items: flex-end; gap: 3px;
+}
+.review-ig-icon {
+  color: var(--gold); opacity: 0.8;
+}
+.review-handle {
+  font-size: 9px; letter-spacing: 0.1em;
+  color: var(--gold); opacity: 0.7;
+}
+.review-text {
+  font-family: 'Outfit', sans-serif;
+  font-style: normal; font-size: 13px; font-weight: 300;
+  color: var(--bone); opacity: 0.85; line-height: 1.8;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  padding-top: 12px;
+}
+
+/* ── CONTACT ── */
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.contact-desc { font-size: 14px; color: var(--bone); opacity: 0.82; line-height: 1.9; margin-bottom: 32px; }
+.contact-methods { display: flex; flex-direction: column; gap: 14px; }
+.c-method { display: flex; align-items: center; gap: 14px; font-size: 13px; color: var(--bone); opacity: 0.85; text-decoration: none; transition: color 0.25s; }
+.c-method:hover { color: var(--bone); }
+.c-icon { width: 34px; height: 34px; background: var(--ash); display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; color: var(--gold); }
+.form { display: flex; flex-direction: column; gap: 22px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.field { display: flex; flex-direction: column; gap: 7px; }
+.f-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--warm); }
+.f-input { background: transparent; border: none; border-bottom: 1px solid rgba(255,255,255,0.15); padding: 11px 0; color: var(--bone); font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 300; outline: none; transition: border-color 0.25s; width: 100%; }
+.f-input:focus { border-color: var(--gold); }
+.f-input::placeholder { color: var(--muted); }
+textarea.f-input { resize: none; height: 88px; }
+select.f-input { appearance: none; cursor: pointer; color: var(--warm); }
+select.f-input option { background: var(--lift); color: var(--bone); }
+
+/* ── FOOTER ── */
+footer { padding: 32px 48px; border-top: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; background: var(--ink); }
+.f-logo { font-size: 13px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.f-links { display: flex; gap: 24px; list-style: none; }
+.f-links a { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.25s; }
+.f-links a:hover { color: var(--gold); }
+.f-copy { font-size: 11px; color: var(--ash); }
+
+@keyframes marqueeStats { 0% { transform:translateX(0); } 100% { transform:translateX(-50%); } }
+
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--ink); }
+::-webkit-scrollbar-thumb { background: var(--ash); }
+
+/* ── Corner cross decorations on lifted sections ── */
+.bg-lift {
+  position: relative;
+}
+.bg-lift .corner-tl,
+.bg-lift .corner-tr,
+.bg-lift .corner-bl,
+.bg-lift .corner-br {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  z-index: 2;
+  pointer-events: none;
+}
+.bg-lift .corner-tl { top: 14px; left: 14px; }
+.bg-lift .corner-tr { top: 14px; right: 14px; }
+.bg-lift .corner-bl { bottom: 14px; left: 14px; }
+.bg-lift .corner-br { bottom: 14px; right: 14px; }
+
+.corner-cross {
+  width: 18px; height: 18px;
+  position: relative;
+  opacity: 0.45;
+}
+.corner-cross::before,
+.corner-cross::after {
+  content: '';
+  position: absolute;
+  background: var(--gold);
+  border-radius: 1px;
+}
+/* Vertical bar */
+.corner-cross::before {
+  width: 1.5px; height: 18px;
+  top: 0; left: 50%; transform: translateX(-50%);
+}
+/* Horizontal bar */
+.corner-cross::after {
+  height: 1.5px; width: 18px;
+  left: 0; top: 50%; transform: translateY(-50%);
+}
+
+/* ════════════════════ MOBILE ════════════════════ */
+
+/* ── Reel Slider (mobile only) ── */
+.ba-slider {
+  display: none;
+  position: relative;
+  overflow: hidden;
+  touch-action: pan-y;
+}
+.ba-slider-track {
+  display: flex;
+  transition: transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+.ba-slider-track .ba-card {
+  flex: 0 0 85vw;
+  max-width: 85vw;
+  margin-right: 16px;
+  scroll-snap-align: start;
+}
+.ba-slider-track .ba-card:last-child { margin-right: 0; }
+.ba-slider-dots {
+  display: flex; justify-content: center; gap: 8px;
+  margin-top: 20px;
+}
+.ba-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--ash); transition: background 0.25s, transform 0.25s;
+  cursor: pointer;
+}
+.ba-dot.active { background: var(--gold); transform: scale(1.3); }
+.ba-slider-arrows {
+  display: flex; justify-content: center; gap: 16px; margin-top: 16px;
+}
+.ba-arrow {
+  width: 40px; height: 40px; border-radius: 50%;
+  border: 1px solid var(--ash); background: transparent;
+  color: var(--bone); font-size: 16px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: border-color 0.25s, background 0.25s;
+}
+.ba-arrow:hover { border-color: var(--gold); background: rgba(182,144,62,0.1); }
+
+@media (max-width: 768px) {
+  /* ── NAV ── */
+  nav { padding: 0 14px; height: 52px; gap: 8px; }
+  .nav-logo { font-size: 11px; letter-spacing: 0.05em; flex-shrink: 0; margin-right: 4px; }
+  .nav-right { gap: 6px; flex: 1; overflow: hidden; }
+  .nav-links {
+    display: flex; gap: 14px;
+    overflow-x: auto; -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; flex: 1; padding: 0 2px;
+    justify-content: flex-start;
+  }
+  .nav-links::-webkit-scrollbar { display: none; }
+  .nav-links li { flex-shrink: 0; }
+  .nav-links a { font-size: 9px; letter-spacing: 0.08em; color: var(--muted); }
+  .nav-cta { font-size: 9px; padding: 7px 11px; letter-spacing: 0.08em; flex-shrink: 0; }
+
+  /* ── HERO ── */
+  .hero {
+    display: block; height: 100svh; min-height: 100svh;
+    position: relative; overflow: hidden;
+  }
+  .hero-photo { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .hero-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 52% 65%; }
+  .hero-photo::after {
+    width: 100%;
+    background: linear-gradient(to top, rgba(13,12,10,1) 0%, rgba(13,12,10,0.65) 45%, rgba(13,12,10,0.1) 100%);
+  }
+  .hero-photo::before { display: none; }
+  .hero-content {
+    position: absolute; bottom: 0; left: 0; right: 0; z-index: 2;
+    justify-content: flex-end; padding: 0 22px 36px; height: auto;
+  }
+  .hero-eyebrow { font-size: 9px; margin-bottom: 8px; letter-spacing: 0.2em; }
+  .hero-name { font-size: clamp(40px, 10vw, 60px); margin-bottom: 2px; }
+  .hero-name-sub { font-size: clamp(40px, 10vw, 60px); margin-bottom: 14px; }
+  .hero-tagline { font-size: 13px; max-width: 100%; margin-bottom: 22px; line-height: 1.75; }
+  .hero-actions { margin-bottom: 0; gap: 12px; flex-wrap: nowrap; }
+  .btn-gold { padding: 12px 24px; font-size: 10px; }
+  .hero-scroll { display: none; }
+
+  /* ── SECTIONS ── */
+  .section, .section-ink, .section-lifted { padding: 52px 20px; }
+  .section-lifted { margin: 20px 10px; border-radius: 16px; }
+  .section-heading { font-size: clamp(24px, 6.5vw, 32px); margin-bottom: 20px; }
+  .section-label { font-size: 10px; margin-bottom: 14px; }
+
+  /* ── SPOTIFY / BEATS ── */
+  .section-lifted iframe { border-radius: 8px; }
+
+  /* ── BEFORE & AFTER — hide grid, show slider ── */
+  .ba-desktop-slider { display: none; }
+  .ba-slider { display: block; }
+
+  /* ── SERVICES ── */
+  .services-grid { grid-template-columns: 1fr; gap: 14px; max-width: 95%; margin: 0 auto; }
+  .services-row { margin-bottom: 36px; }
+  .ba-slider { max-width: 95%; margin: 0 auto; }
+  .ba-slider-track .ba-card { flex: 0 0 100%; max-width: 100%; }
+  .services-row-heading { font-size: 18px; margin-bottom: 20px; }
+  .svc-body { padding: 20px 20px 24px; }
+  .svc-name { font-size: 18px; }
+  .svc-desc { font-size: 12px; margin-bottom: 16px; }
+  .svc-list li { font-size: 12px; }
+  .svc-link { padding: 11px 16px; font-size: 10px; }
+
+  /* ── REVIEWS ── */
+  .reviews-track-wrap {
+    mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 4%, black 96%, transparent 100%);
+  }
+  .review-card { width: 76vw; }
+  .review-photo { aspect-ratio: 3/2.5; }
+  .review-body { padding: 14px 14px 16px; }
+  .review-name { font-size: 14px; }
+  .review-text { font-size: 12px; }
+
+  /* ── ABOUT ── */
+  .about-grid { grid-template-columns: 1fr; gap: 28px; }
+  .about-photo-wrap { order: -1; }
+  .about-photo { width: 72%; border-radius: 12px; margin: 0 auto; }
+  .about-body { font-size: 15px; line-height: 1.85; }
+  .about-pull { font-size: 16px; padding-left: 14px; margin: 20px 0; }
+
+  /* ── GALLERY ── */
+  .gallery-grid { display: block; }
+  .gallery-grid > .g-item { aspect-ratio: auto; }
+  .gallery-stack { display: block; }
+
+  /* ── CONTACT ── */
+  .contact-grid { grid-template-columns: 1fr; gap: 36px; }
+  .form-row { grid-template-columns: 1fr; gap: 0; }
+  .contact-desc { font-size: 13px; margin-bottom: 24px; }
+  .c-method { font-size: 12px; }
+
+  /* ── FOOTER ── */
+  footer { flex-direction: column; align-items: flex-start; gap: 18px; padding: 24px 20px; }
+  .f-links { flex-wrap: wrap; gap: 12px; }
+  .f-copy { font-size: 10px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#top" class="nav-logo">Jeevan Khatri</a>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#portfolio">Work</a></li>
+      <li><a href="#transformations">Before & After</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#studio">Studio</a></li>
+      <li><a href="#beats">Beats</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Get in Touch</a>
+  </div>
+</nav>
+
+<!-- ① HERO — ink bg -->
+<section class="hero bg-ink" id="top" style="margin-bottom:0;">
+  <div class="hero-photo">
+    <img src="media/front-page.jpeg" alt="Jeevan Khatri working in his studio" />
+  </div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Audio Engineer · Music Producer</p>
+    <div class="hero-name">Jeevan</div>
+    <div class="hero-name-sub">Khatri</div>
+    <p class="hero-tagline">A decade of crafting sound that moves people. Mixing, mastering, and production for artists who take their music seriously.</p>
+    <div class="hero-actions">
+      <a href="#portfolio" class="btn btn-gold">Hear the Work</a>
+      <a href="#contact" class="btn btn-ghost">Work With Me</a>
+    </div>
+    <div class="hero-scroll"><span class="scroll-line"></span><span>Scroll</span></div>
+  </div>
+</section>
+
+<!-- ② SPOTIFY — lifted, curves in from hero -->
+<section class="section-lifted bg-lift" id="portfolio">
+  <div class="corner-tl"><div class="corner-cross"></div></div>
+  <div class="corner-tr"><div class="corner-cross"></div></div>
+  <div class="corner-bl"><div class="corner-cross"></div></div>
+  <div class="corner-br"><div class="corner-cross"></div></div>
+  <div class="section-label center">Portfolio</div>
+  <h2 class="section-heading center">Tracks I've <span class="serif">engineered</span></h2>
+  <p class="section-sub center">Every track below passed through my hands — mixed, mastered, or produced from scratch. This is the work.</p>
+  <div style="max-width:95%;margin:0 auto;">
+    <iframe data-testid="embed-iframe" style="border-radius:4px;display:block;" src="https://open.spotify.com/embed/playlist/5yCSy7e4JVSbQI49L3ISYh?utm_source=generator&si=37c0d732a4124c1e" width="100%" height="576" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+  </div>
+</section>
+
+<!-- ③ BEFORE & AFTER — ink bg -->
+<section class="section bg-ink" id="transformations">
+  <div class="section-label center">Before & After</div>
+  <h2 class="section-heading center">Hear the <span class="serif">difference</span></h2>
+  <p class="section-sub center">Raw recordings transformed into release-ready tracks.</p>
+    <div class="ba-desktop-slider">
+    <div class="ba-desktop-viewport">
+      <div class="ba-grid" id="baDesktopTrack">
+        <div class="ba-card">
+          <div class="ba-video">
+            <video src="ba1.mp4" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="metadata"></video>
+          </div>
+        </div>
+        <div class="ba-card">
+          <div class="ba-video">
+            <video src="ba2.mp4" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="metadata"></video>
+          </div>
+        </div>
+        <div class="ba-card">
+          <div class="ba-video">
+            <video src="ba3.mp4" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="metadata"></video>
+          </div>
+        </div>
+        <div class="ba-card">
+          <div class="ba-video">
+            <video src="ba4.mp4" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="metadata"></video>
+          </div>
+        </div>
+        <div class="ba-card">
+          <div class="ba-video">
+            <video src="ba5.mp4" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="metadata"></video>
+          </div>
+        </div>
+        <div class="ba-card">
+          <div class="ba-video">
+            <video src="ba6.mp4" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="metadata"></video>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ba-desktop-nav">
+      <button class="ba-desktop-arrow" id="baPrev">&#8592;</button>
+      <div class="ba-desktop-dot active" onclick="baDesktopGo(0)"></div>
+      <div class="ba-desktop-dot" onclick="baDesktopGo(1)"></div>
+      <button class="ba-desktop-arrow" id="baNext">&#8594;</button>
+    </div>
+  </div>
+
+  <!-- Mobile reel slider -->
+    <div class="ba-slider" id="baSlider">
+    <div class="ba-slider-track" id="baSliderTrack">
+      <div class="ba-card">
+        <div class="ba-video">
+          <video src="ba1.mp4" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="metadata"></video>
+        </div>
+      </div>
+      <div class="ba-card">
+        <div class="ba-video">
+          <video src="ba2.mp4" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="metadata"></video>
+        </div>
+      </div>
+      <div class="ba-card">
+        <div class="ba-video">
+          <video src="ba3.mp4" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="metadata"></video>
+        </div>
+      </div>
+      <div class="ba-card">
+        <div class="ba-video">
+          <video src="ba4.mp4" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="metadata"></video>
+        </div>
+      </div>
+      <div class="ba-card">
+        <div class="ba-video">
+          <video src="ba5.mp4" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="metadata"></video>
+        </div>
+      </div>
+      <div class="ba-card">
+        <div class="ba-video">
+          <video src="ba6.mp4" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="metadata"></video>
+        </div>
+      </div>
+    </div>
+    <div class="ba-slider-dots">
+      <div class="ba-dot active" onclick="goToSlide(0)"></div>
+      <div class="ba-dot" onclick="goToSlide(1)"></div>
+      <div class="ba-dot" onclick="goToSlide(2)"></div>
+      <div class="ba-dot" onclick="goToSlide(3)"></div>
+      <div class="ba-dot" onclick="goToSlide(4)"></div>
+      <div class="ba-dot" onclick="goToSlide(5)"></div>
+    </div>
+    <div class="ba-slider-arrows">
+      <button class="ba-arrow" onclick="prevSlide()">&#8592;</button>
+      <button class="ba-arrow" onclick="nextSlide()">&#8594;</button>
+    </div>
+  </div>
+
+</section>
+
+<!-- ④ SERVICES — lifted, curves both sides -->
+<section class="section-lifted bg-lift" id="services">
+  <div class="corner-tl"><div class="corner-cross"></div></div>
+  <div class="corner-tr"><div class="corner-cross"></div></div>
+  <div class="corner-bl"><div class="corner-cross"></div></div>
+  <div class="corner-br"><div class="corner-cross"></div></div>
+  <div class="section-label center">Services</div>
+  <h2 class="section-heading center no-sub" style="margin-bottom:40px;">What I <span class="serif">offer</span></h2>
+
+  <!-- Row 1: Professional Services -->
+  <div class="services-row">
+    <p class="services-row-heading" style="text-align:center;">Professional Services</p>
+    <div class="services-grid">
+
+      <div class="svc">
+        <div class="svc-video">
+          <video src="mixing___mastering_preview.mp4" autoplay loop muted playsinline></video>
+          <div class="svc-badge-wrap"><span class="svc-badge">Most Popular</span></div>
+        </div>
+        <div class="svc-body">
+          <div class="svc-name">Mixing & Mastering</div>
+          <p class="svc-desc">Full mixing and mastering in one seamless package. From raw stems to a streaming-ready master, handled end to end.</p>
+          <ul class="svc-list"><li>Full stem mix + final master</li><li>Genre-accurate sound shaping</li><li>Revisions until you're satisfied</li><li>24-bit 48k WAV + stems delivery</li></ul>
+          <a href="#contact" class="svc-link">Send an Inquiry</a>
+        </div>
+      </div>
+
+      <div class="svc">
+        <div class="svc-video">
+          <video src="mastering_preview.mp4" autoplay loop muted playsinline></video>
+        </div>
+        <div class="svc-body">
+          <div class="svc-name">Mastering</div>
+          <p class="svc-desc">Already have a mix you love? I'll take it across the finish line — polished, punchy, and optimized for every streaming platform.</p>
+          <ul class="svc-list"><li>Spotify, Apple Music, YouTube ready</li><li>Platform-specific LUFS targeting</li><li>Revisions until you're satisfied</li><li>MP3 + 24-bit 48k WAV delivery</li></ul>
+          <a href="#contact" class="svc-link">Send an Inquiry</a>
+        </div>
+      </div>
+
+      <div class="svc">
+        <div class="svc-video">
+          <video src="music_production_preview_video.mp4" autoplay loop muted playsinline></video>
+        </div>
+        <div class="svc-body">
+          <div class="svc-name">Beat Production</div>
+          <p class="svc-desc">Custom beats built for your vision. Trap, R&amp;B, Hip-Hop. Browse the catalog or commission something from scratch.</p>
+          <ul class="svc-list"><li>Custom or catalog beats</li><li>Trackout stems included</li><li>Exclusive &amp; non-exclusive licenses</li><li>Also available on BeatStars</li></ul>
+          <a href="#contact" class="svc-link">Send an Inquiry</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Row 2: Learning -->
+  <div class="services-row">
+    <p class="services-row-heading" style="text-align:center;">Learning & Mentorship</p>
+    <div class="services-grid">
+
+      <div class="svc">
+        <div class="svc-video">
+          <video src="mentorship_preview_video.mp4" autoplay loop muted playsinline></video>
+          <div class="svc-badge-wrap"><span class="svc-badge">Now Available</span></div>
+        </div>
+        <div class="svc-body">
+          <div class="svc-name">Mentorship</div>
+          <p class="svc-desc">Grow Your Career, Not Just Your Skills. What helped me grow from an old laptop and cheap earphones to building my own studio and making a living out of music.</p>
+          <ul class="svc-list"><li>Career strategy &amp; goal-setting</li><li>Client acquisition &amp; outreach</li><li>Social media &amp; Marketing</li><li>Pricing &amp; service positioning</li></ul>
+          <a href="#contact" class="svc-link">Send an Inquiry</a>
+        </div>
+      </div>
+
+      <div class="svc">
+        <div class="svc-video">
+          <video src="learn_mixing_and_mastering_preview.mp4" autoplay loop muted playsinline></video>
+        </div>
+        <div class="svc-body">
+          <div class="svc-name">Learn Mixing & Mastering</div>
+          <p class="svc-desc">Understand the full post-production process from the inside out. Learn how professional engineers think — then apply it yourself.</p>
+          <ul class="svc-list"><li>Mix theory &amp; signal chain</li><li>EQ, compression, spatial processing</li><li>Mastering chain &amp; loudness targeting</li><li>Real track walkthroughs &amp; deconstructions</li></ul>
+          <a href="#contact" class="svc-link">Send an Inquiry</a>
+        </div>
+      </div>
+
+      <div class="svc">
+        <div class="svc-video">
+          <video src="learn_music_production_preview_video.mp4" autoplay loop muted playsinline></video>
+        </div>
+        <div class="svc-body">
+          <div class="svc-name">Learn Music Production</div>
+          <p class="svc-desc">Learn music production from someone who has been doing this professionally for a decade. Beat-making to advanced arrangement and sound design.</p>
+          <ul class="svc-list"><li>Beat making, sound design, arrangement etc</li><li>DAW workflow optimization</li><li>Beat deconstructions</li><li>Applicable music theory</li></ul>
+          <a href="#contact" class="svc-link">Send an Inquiry</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+<!-- ⑤ REVIEWS — ink bg, scrolling carousel -->
+<section class="section bg-ink" id="reviews">
+  <div class="section-label center">Reviews</div>
+  <h2 class="section-heading center">What <span class="serif">artists</span> say</h2>
+  <p class="section-sub center">Google Reviews</p>
+  <div class="reviews-track-wrap">
+    <div class="reviews-track">
+      <div class="review-card">
+        <div class="review-photo">
+          <img src="r1.jpg" alt="Lo" />
+        </div>
+        <div class="review-body">
+          <div class="review-name">Lo</div>
+          <div style="font-size:14px;color:var(--bone);letter-spacing:0.04em;margin-bottom:12px;margin-top:-4px;font-weight:300;opacity:0.88;">North Carolina, USA</div>
+          <div style="font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--bone);opacity:0.75;margin-bottom:4px;">Google Review</div>
+          <div class="review-meta-row">
+            <div class="review-stars">★★★★★</div>
+            <div class="review-ig">
+              <div class="review-ig-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+              </div>
+              <div class="review-handle">@logan_abdo23</div>
+            </div>
+          </div>
+          <p class="review-text">"One of the coolest producers I've worked with as far as beats and mixing and mastering. He's very understanding and knows what he's doing."</p>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-photo">
+          <img src="r2.jpg" alt="J Krish" />
+        </div>
+        <div class="review-body">
+          <div class="review-name">J Krish</div>
+          <div style="font-size:14px;color:var(--bone);letter-spacing:0.04em;margin-bottom:12px;margin-top:-4px;font-weight:300;opacity:0.88;">Winnipeg, Canada</div>
+          <div style="font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--bone);opacity:0.75;margin-bottom:4px;">Google Review</div>
+          <div class="review-meta-row">
+            <div class="review-stars">★★★★★</div>
+            <div class="review-ig">
+              <div class="review-ig-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+              </div>
+              <div class="review-handle">@jkrishofficial</div>
+            </div>
+          </div>
+          <p class="review-text">"A project becomes great not when everyone involved does their part, but when everyone takes accountability and ownership of what they do — that's the best about working with Jeevan."</p>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-photo">
+          <img src="r3.jpg" alt="ZAAI" style="transform:scale(1.25);transform-origin:center top;" />
+        </div>
+        <div class="review-body">
+          <div class="review-name">ZAAI</div>
+          <div style="font-size:14px;color:var(--bone);letter-spacing:0.04em;margin-bottom:12px;margin-top:-4px;font-weight:300;opacity:0.88;">Dubai, UAE</div>
+          <div style="font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--bone);opacity:0.75;margin-bottom:4px;">Google Review</div>
+          <div class="review-meta-row">
+            <div class="review-stars">★★★★★</div>
+            <div class="review-ig">
+              <div class="review-ig-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+              </div>
+              <div class="review-handle">@zaaitells</div>
+            </div>
+          </div>
+          <p class="review-text">"He brought incredible clarity, balance, and professionalism to the final track. Patient, understood our vision, and delivered a polished, high quality sound that exceeded our expectations."</p>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-photo">
+          <img src="r4.jpg" alt="Rang" />
+        </div>
+        <div class="review-body">
+          <div class="review-name">Rang</div>
+          <div style="font-size:14px;color:var(--bone);letter-spacing:0.04em;margin-bottom:12px;margin-top:-4px;font-weight:300;opacity:0.88;">Michigan, USA</div>
+          <div style="font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--bone);opacity:0.75;margin-bottom:4px;">Google Review</div>
+          <div class="review-meta-row">
+            <div class="review-stars">★★★★★</div>
+            <div class="review-ig">
+              <div class="review-ig-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+              </div>
+              <div class="review-handle">@ranglovesyou</div>
+            </div>
+          </div>
+          <p class="review-text">"Amazing person to work with. Jeevan has engineered many of my tracks, and he is one of the most flexible and kind people I have worked with. Super responsive and a hard worker as well. 100 percent recommend."</p>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-photo">
+          <img src="r5.jpg" alt="LAI" />
+        </div>
+        <div class="review-body">
+          <div class="review-name">LAI</div>
+          <div style="font-size:14px;color:var(--bone);letter-spacing:0.04em;margin-bottom:12px;margin-top:-4px;font-weight:300;opacity:0.88;">Kerala, India</div>
+          <div style="font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--bone);opacity:0.75;margin-bottom:4px;">Google Review</div>
+          <div class="review-meta-row">
+            <div class="review-stars">★★★★★</div>
+            <div class="review-ig">
+              <div class="review-ig-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+              </div>
+              <div class="review-handle">@lairaps</div>
+            </div>
+          </div>
+          <p class="review-text">"Jeevan Khatri is an absolute pro. As a rapper he brought my tracks to life, perfectly balancing everything while keeping the original vibe intact. Quick turnaround and excellent communication."</p>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-photo">
+          <img src="r6.jpg" alt="Seth Panda" />
+        </div>
+        <div class="review-body">
+          <div class="review-name">Seth Panda</div>
+          <div style="font-size:14px;color:var(--bone);letter-spacing:0.04em;margin-bottom:12px;margin-top:-4px;font-weight:300;opacity:0.88;">Ontario, Canada</div>
+          <div style="font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--bone);opacity:0.75;margin-bottom:4px;">Google Review</div>
+          <div class="review-meta-row">
+            <div class="review-stars">★★★★★</div>
+            <div class="review-ig">
+              <div class="review-ig-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+              </div>
+              <div class="review-handle">@spaandaa</div>
+            </div>
+          </div>
+          <p class="review-text">"We've built a chemistry that just makes music flow. Always available, delivers on time, and his approach to different sounds is something else. Great producer, great engineer."</p>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-photo">
+          <img src="r7.jpg" alt="lil.Beelzebub" />
+        </div>
+        <div class="review-body">
+          <div class="review-name">lil.Beelzebub</div>
+          <div style="font-size:14px;color:var(--bone);letter-spacing:0.04em;margin-bottom:12px;margin-top:-4px;font-weight:300;opacity:0.88;">Nova Scotia, Canada</div>
+          <div style="font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--bone);opacity:0.75;margin-bottom:4px;">Google Review</div>
+          <div class="review-meta-row">
+            <div class="review-stars">★★★★★</div>
+            <div class="review-ig">
+              <div class="review-ig-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+              </div>
+              <div class="review-handle">@lil.beelzebub</div>
+            </div>
+          </div>
+          <p class="review-text">"Having worked with numerous sound engineers throughout my career, I can confidently say Jeevan is in a league of his own. His musical intuition transcends regional boundaries."</p>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-photo">
+          <img src="r8.jpg" alt="Karshee" />
+        </div>
+        <div class="review-body">
+          <div class="review-name">Karshee</div>
+          <div style="font-size:14px;color:var(--bone);letter-spacing:0.04em;margin-bottom:12px;margin-top:-4px;font-weight:300;opacity:0.88;">Ontario, Canada</div>
+          <div style="font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--bone);opacity:0.75;margin-bottom:4px;">Google Review</div>
+          <div class="review-meta-row">
+            <div class="review-stars">★★★★★</div>
+            <div class="review-ig">
+              <div class="review-ig-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+              </div>
+              <div class="review-handle">@karshee_</div>
+            </div>
+          </div>
+          <p class="review-text">"A great engineer who you can work with. Highly understanding and supporting."</p>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-photo">
+          <img src="r9.jpg" alt="Prozach" />
+        </div>
+        <div class="review-body">
+          <div class="review-name">Prozach</div>
+          <div style="font-size:14px;color:var(--bone);letter-spacing:0.04em;margin-bottom:12px;margin-top:-4px;font-weight:300;opacity:0.88;">Hyderabad, India</div>
+          <div style="font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--bone);opacity:0.75;margin-bottom:4px;">Google Review</div>
+          <div class="review-meta-row">
+            <div class="review-stars">★★★★★</div>
+            <div class="review-ig">
+              <div class="review-ig-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+              </div>
+              <div class="review-handle">@prozach.wav</div>
+            </div>
+          </div>
+          <p class="review-text">"One of the best! I had an amazing time working with Jeevan and damn we cooked. He will make your songs the best they can ever be."</p>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-photo">
+          <img src="r10.jpg" alt="EBZZ" />
+        </div>
+        <div class="review-body">
+          <div class="review-name">EBZZ</div>
+          <div style="font-size:14px;color:var(--bone);letter-spacing:0.04em;margin-bottom:12px;margin-top:-4px;font-weight:300;opacity:0.88;">Winnipeg, Canada</div>
+          <div style="font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--bone);opacity:0.75;margin-bottom:4px;">Google Review</div>
+          <div class="review-meta-row">
+            <div class="review-stars">★★★★★</div>
+            <div class="review-ig">
+              <div class="review-ig-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+              </div>
+              <div class="review-handle">@ebzz.gram</div>
+            </div>
+          </div>
+          <p class="review-text">"As a producer, I've learned a tremendous amount from him, especially on the mixing side. The quality of the work speaks for itself, and I genuinely love the outcome every time."</p>
+        </div>
+      </div>
+      
+      <div class="review-card">
+        <div class="review-photo">
+          <img src="r11.jpg" alt="Zeef" />
+        </div>
+        <div class="review-body">
+          <div class="review-name">Zeef</div>
+          <div style="font-size:14px;color:var(--bone);letter-spacing:0.04em;margin-bottom:12px;margin-top:-4px;font-weight:300;opacity:0.88;">Toronto, Canada</div>
+          <div style="font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--bone);opacity:0.75;margin-bottom:4px;">Google Review</div>
+          <div class="review-meta-row">
+            <div class="review-stars">★★★★★</div>
+            <div class="review-ig">
+              <div class="review-ig-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+              </div>
+              <div class="review-handle">@officialzeef</div>
+            </div>
+          </div>
+          <p class="review-text">"Had a good experience working with Jeevan Khatri. I really like his work. He adds his own touch to the track and it actually made the song sound a lot better. Happy with how everything turned out."</p>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-photo">
+          <img src="r1.jpg" alt="Lo" />
+        </div>
+        <div class="review-body">
+          <div class="review-name">Lo</div>
+          <div style="font-size:14px;color:var(--bone);letter-spacing:0.04em;margin-bottom:12px;margin-top:-4px;font-weight:300;opacity:0.88;">North Carolina, USA</div>
+          <div style="font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--bone);opacity:0.75;margin-bottom:4px;">Google Review</div>
+          <div class="review-meta-row">
+            <div class="review-stars">★★★★★</div>
+            <div class="review-ig">
+              <div class="review-ig-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+              </div>
+              <div class="review-handle">@logan_abdo23</div>
+            </div>
+          </div>
+          <p class="review-text">"One of the coolest producers I've worked with as far as beats and mixing and mastering. He's very understanding and knows what he's doing."</p>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-photo">
+          <img src="r2.jpg" alt="J Krish" />
+        </div>
+        <div class="review-body">
+          <div class="review-name">J Krish</div>
+          <div style="font-size:14px;color:var(--bone);letter-spacing:0.04em;margin-bottom:12px;margin-top:-4px;font-weight:300;opacity:0.88;">Winnipeg, Canada</div>
+          <div style="font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--bone);opacity:0.75;margin-bottom:4px;">Google Review</div>
+          <div class="review-meta-row">
+            <div class="review-stars">★★★★★</div>
+            <div class="review-ig">
+              <div class="review-ig-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+              </div>
+              <div class="review-handle">@jkrishofficial</div>
+            </div>
+          </div>
+          <p class="review-text">"A project becomes great not when everyone involved does their part, but when everyone takes accountability and ownership of what they do — that's the best about working with Jeevan."</p>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-photo">
+          <img src="r3.jpg" alt="ZAAI" style="transform:scale(1.25);transform-origin:center top;" />
+        </div>
+        <div class="review-body">
+          <div class="review-name">ZAAI</div>
+          <div style="font-size:14px;color:var(--bone);letter-spacing:0.04em;margin-bottom:12px;margin-top:-4px;font-weight:300;opacity:0.88;">Dubai, UAE</div>
+          <div style="font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--bone);opacity:0.75;margin-bottom:4px;">Google Review</div>
+          <div class="review-meta-row">
+            <div class="review-stars">★★★★★</div>
+            <div class="review-ig">
+              <div class="review-ig-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+              </div>
+              <div class="review-handle">@zaaitells</div>
+            </div>
+          </div>
+          <p class="review-text">"He brought incredible clarity, balance, and professionalism to the final track. Patient, understood our vision, and delivered a polished, high quality sound that exceeded our expectations."</p>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-photo">
+          <img src="r4.jpg" alt="Rang" />
+        </div>
+        <div class="review-body">
+          <div class="review-name">Rang</div>
+          <div style="font-size:14px;color:var(--bone);letter-spacing:0.04em;margin-bottom:12px;margin-top:-4px;font-weight:300;opacity:0.88;">Michigan, USA</div>
+          <div style="font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--bone);opacity:0.75;margin-bottom:4px;">Google Review</div>
+          <div class="review-meta-row">
+            <div class="review-stars">★★★★★</div>
+            <div class="review-ig">
+              <div class="review-ig-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+              </div>
+              <div class="review-handle">@ranglovesyou</div>
+            </div>
+          </div>
+          <p class="review-text">"Amazing person to work with. Jeevan has engineered many of my tracks, and he is one of the most flexible and kind people I have worked with. Super responsive and a hard worker as well. 100 percent recommend."</p>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-photo">
+          <img src="r5.jpg" alt="LAI" />
+        </div>
+        <div class="review-body">
+          <div class="review-name">LAI</div>
+          <div style="font-size:14px;color:var(--bone);letter-spacing:0.04em;margin-bottom:12px;margin-top:-4px;font-weight:300;opacity:0.88;">Kerala, India</div>
+          <div style="font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--bone);opacity:0.75;margin-bottom:4px;">Google Review</div>
+          <div class="review-meta-row">
+            <div class="review-stars">★★★★★</div>
+            <div class="review-ig">
+              <div class="review-ig-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+              </div>
+              <div class="review-handle">@lairaps</div>
+            </div>
+          </div>
+          <p class="review-text">"Jeevan Khatri is an absolute pro. As a rapper he brought my tracks to life, perfectly balancing everything while keeping the original vibe intact. Quick turnaround and excellent communication."</p>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-photo">
+          <img src="r6.jpg" alt="Seth Panda" />
+        </div>
+        <div class="review-body">
+          <div class="review-name">Seth Panda</div>
+          <div style="font-size:14px;color:var(--bone);letter-spacing:0.04em;margin-bottom:12px;margin-top:-4px;font-weight:300;opacity:0.88;">Ontario, Canada</div>
+          <div style="font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--bone);opacity:0.75;margin-bottom:4px;">Google Review</div>
+          <div class="review-meta-row">
+            <div class="review-stars">★★★★★</div>
+            <div class="review-ig">
+              <div class="review-ig-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+              </div>
+              <div class="review-handle">@spaandaa</div>
+            </div>
+          </div>
+          <p class="review-text">"We've built a chemistry that just makes music flow. Always available, delivers on time, and his approach to different sounds is something else. Great producer, great engineer."</p>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-photo">
+          <img src="r7.jpg" alt="lil.Beelzebub" />
+        </div>
+        <div class="review-body">
+          <div class="review-name">lil.Beelzebub</div>
+          <div style="font-size:14px;color:var(--bone);letter-spacing:0.04em;margin-bottom:12px;margin-top:-4px;font-weight:300;opacity:0.88;">Nova Scotia, Canada</div>
+          <div style="font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--bone);opacity:0.75;margin-bottom:4px;">Google Review</div>
+          <div class="review-meta-row">
+            <div class="review-stars">★★★★★</div>
+            <div class="review-ig">
+              <div class="review-ig-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+              </div>
+              <div class="review-handle">@lil.beelzebub</div>
+            </div>
+          </div>
+          <p class="review-text">"Having worked with numerous sound engineers throughout my career, I can confidently say Jeevan is in a league of his own. His musical intuition transcends regional boundaries."</p>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-photo">
+          <img src="r8.jpg" alt="Karshee" />
+        </div>
+        <div class="review-body">
+          <div class="review-name">Karshee</div>
+          <div style="font-size:14px;color:var(--bone);letter-spacing:0.04em;margin-bottom:12px;margin-top:-4px;font-weight:300;opacity:0.88;">Ontario, Canada</div>
+          <div style="font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--bone);opacity:0.75;margin-bottom:4px;">Google Review</div>
+          <div class="review-meta-row">
+            <div class="review-stars">★★★★★</div>
+            <div class="review-ig">
+              <div class="review-ig-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+              </div>
+              <div class="review-handle">@karshee_</div>
+            </div>
+          </div>
+          <p class="review-text">"A great engineer who you can work with. Highly understanding and supporting."</p>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-photo">
+          <img src="r9.jpg" alt="Prozach" />
+        </div>
+        <div class="review-body">
+          <div class="review-name">Prozach</div>
+          <div style="font-size:14px;color:var(--bone);letter-spacing:0.04em;margin-bottom:12px;margin-top:-4px;font-weight:300;opacity:0.88;">Hyderabad, India</div>
+          <div style="font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--bone);opacity:0.75;margin-bottom:4px;">Google Review</div>
+          <div class="review-meta-row">
+            <div class="review-stars">★★★★★</div>
+            <div class="review-ig">
+              <div class="review-ig-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+              </div>
+              <div class="review-handle">@prozach.wav</div>
+            </div>
+          </div>
+          <p class="review-text">"One of the best! I had an amazing time working with Jeevan and damn we cooked. He will make your songs the best they can ever be."</p>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-photo">
+          <img src="r10.jpg" alt="EBZZ" />
+        </div>
+        <div class="review-body">
+          <div class="review-name">EBZZ</div>
+          <div style="font-size:14px;color:var(--bone);letter-spacing:0.04em;margin-bottom:12px;margin-top:-4px;font-weight:300;opacity:0.88;">Winnipeg, Canada</div>
+          <div style="font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--bone);opacity:0.75;margin-bottom:4px;">Google Review</div>
+          <div class="review-meta-row">
+            <div class="review-stars">★★★★★</div>
+            <div class="review-ig">
+              <div class="review-ig-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+              </div>
+              <div class="review-handle">@ebzz.gram</div>
+            </div>
+          </div>
+          <p class="review-text">"As a producer, I've learned a tremendous amount from him, especially on the mixing side. The quality of the work speaks for itself, and I genuinely love the outcome every time."</p>
+        </div>
+      </div>
+      
+      <div class="review-card">
+        <div class="review-photo">
+          <img src="r11.jpg" alt="Zeef" />
+        </div>
+        <div class="review-body">
+          <div class="review-name">Zeef</div>
+          <div style="font-size:14px;color:var(--bone);letter-spacing:0.04em;margin-bottom:12px;margin-top:-4px;font-weight:300;opacity:0.88;">Toronto, Canada</div>
+          <div style="font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--bone);opacity:0.75;margin-bottom:4px;">Google Review</div>
+          <div class="review-meta-row">
+            <div class="review-stars">★★★★★</div>
+            <div class="review-ig">
+              <div class="review-ig-icon">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+              </div>
+              <div class="review-handle">@officialzeef</div>
+            </div>
+          </div>
+          <p class="review-text">"Had a good experience working with Jeevan Khatri. I really like his work. He adds his own touch to the track and it actually made the song sound a lot better. Happy with how everything turned out."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  </section>
+
+<!-- ⑥ ABOUT — ink bg -->
+<section class="section-lifted bg-lift" id="about">
+  <div class="corner-tl"><div class="corner-cross"></div></div>
+  <div class="corner-tr"><div class="corner-cross"></div></div>
+  <div class="corner-bl"><div class="corner-cross"></div></div>
+  <div class="corner-br"><div class="corner-cross"></div></div>
+  <div class="section-label">About</div>
+  <div class="about-grid">
+    <div>
+      <h2 class="section-heading no-sub">The person<br>behind the <span class="serif">mix</span></h2>
+      <div class="about-body">
+        <p>I'm Jeevan Khatri — a mixing and mastering engineer and music producer with ten years of professional experience. I've built my studio operation from the ground up, working with artists across the globe.</p>
+        <p>In a decade of doing this, I've had the privilege of working alongside multi-platinum producers, with tracks I've engineered accumulating millions of streams internationally. Holding certificates from institutions like Berklee Online.</p>
+        <p>My journey started far away from a professional studio. I began in a small storeroom with an old laptop, inexpensive earphones, and no formal guidance or industry connections. I had no roadmap for how to build a career in music. I simply had the desire to understand it. I taught myself, learned through years of experimentation, mistakes, and relentless practice, and gradually built my way into professional music one step at a time.</p>
+        <p>I'm not just someone who knows the technical side. I understand music. That's what separates a technically clean mix from one that actually moves people.</p>
+      </div>
+      <div class="about-pull">"I don't just process audio. I make sure every decision serves the song."</div>
+    </div>
+    <div class="about-photo-wrap">
+      <div class="about-photo">
+        <img src="media/about-portrait-cropped.jpeg" alt="Portrait of Jeevan Khatri" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑦ STUDIO — lifted, full bleed gallery -->
+<section class="section bg-ink" id="studio" style="padding-bottom:28px; overflow:visible;">
+  <div style="padding-bottom:32px;">
+    <div class="section-label center">Studio</div>
+    <h2 class="section-heading center">The <span class="serif">space</span></h2>
+    <p class="section-sub center">Where the magic happens.</p>
+  </div>
+  <div class="gallery-grid">
+    <div class="g-item"><img src="media/studio-1.jpeg" alt="Jeevan Khatri producing music in the studio" /></div>
+    <div class="g-item"><img src="media/studio-2.jpeg" alt="Jeevan Khatri at his production desk" /></div>
+    <div class="g-item"><img src="media/studio-4.jpeg" alt="Jeevan Khatri playing keys in the studio" /></div>
+    <div class="gallery-stack">
+      <div class="g-item"><img src="media/studio-3.jpeg" alt="Overhead view of the studio setup" /></div>
+      <div class="g-item"><img src="media/studio-5.jpeg" alt="Jeevan Khatri playing guitar" /></div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑧ BEATS — lifted -->
+<section class="section-lifted bg-lift" id="beats">
+  <div class="corner-tl"><div class="corner-cross"></div></div>
+  <div class="corner-tr"><div class="corner-cross"></div></div>
+  <div class="corner-bl"><div class="corner-cross"></div></div>
+  <div class="corner-br"><div class="corner-cross"></div></div>
+  <div class="section-label center">Beats</div>
+  <h2 class="section-heading center">Beats for your <span class="serif">next record</span></h2>
+  <p class="section-sub center">Browse the catalog. Exclusive and non-exclusive licenses available. Built for artists who need something that hits.</p>
+  <div style="max-width:95%;margin:0 auto;">
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;">
+      <span style="font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);border:1px solid var(--ash);padding:7px 16px;">Trap</span>
+      <span style="font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);border:1px solid var(--ash);padding:7px 16px;">R&amp;B</span>
+      <span style="font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);border:1px solid var(--ash);padding:7px 16px;">Hip-Hop</span>
+      <span style="font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);border:1px solid var(--ash);padding:7px 16px;">Exclusive Available</span>
+      <span style="font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);border:1px solid var(--ash);padding:7px 16px;">Trackouts Included</span>
+    </div>
+    <iframe src="https://player.beatstars.com/?storeId=149270" width="100%" height="880" style="border:none;display:block;"></iframe>
+  </div>
+</section>
+
+<!-- ⑨ CONTACT — ink bg -->
+<section class="section bg-ink" id="contact">
+  <div class="contact-grid">
+    <div>
+      <div class="section-label">Contact</div>
+      <h2 class="section-heading no-sub">Let's make<br>something <span class="serif">real.</span></h2>
+      <p class="contact-desc">Whether it's a mix, a master, a custom beat, or a teaching session — reach out and tell me about your project. I respond within 24 hours.</p>
+      <div class="contact-methods">
+        <a href="mailto:contact@jeevankhatri.com" class="c-method">
+          <div class="c-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+          </div>contact@jeevankhatri.com
+        </a>
+        <a href="https://www.instagram.com/jeevan_khatri?igsh=d3VoZnBhOWhybHFp" class="c-method" target="_blank" rel="noopener">
+          <div class="c-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          </div>@jeevan_khatri
+        </a>
+      </div>
+    </div>
+    <div class="form" id="contactForm">
+      <div class="form-row">
+        <div class="field">
+          <label class="f-label">Your Name</label>
+          <input class="f-input" type="text" id="f-name" placeholder="Artist or Producer name" required/>
+        </div>
+        <div class="field">
+          <label class="f-label">Email</label>
+          <input class="f-input" type="email" id="f-email" placeholder="your@email.com" required/>
+        </div>
+      </div>
+      <div class="field">
+        <label class="f-label">Service Needed</label>
+        <select class="f-input" id="f-service">
+          <option value="" disabled selected>Select a service</option>
+          <option>Mixing & Mastering</option>
+          <option>Mastering Only</option>
+          <option>Beat Production</option>
+          <option>Mentorship</option>
+          <option>Learn Music Production</option>
+          <option>Learn Mixing & Mastering</option>
+        </select>
+      </div>
+      <div class="field">
+        <label class="f-label">Tell me about your project</label>
+        <textarea class="f-input" id="f-message" placeholder="Genre, references, deadline, any details that help..."></textarea>
+      </div>
+
+      <!-- Submit button -->
+      <button type="button" id="f-submit" class="btn btn-gold" style="text-align:center;display:block;padding:14px;width:100%;cursor:pointer;font-family:'Outfit',sans-serif;">
+        Send Inquiry
+      </button>
+
+      <!-- Status messages -->
+      <div id="f-success" style="display:none;margin-top:16px;padding:16px 20px;border:1px solid rgba(182,144,62,0.4);background:rgba(182,144,62,0.08);font-size:13px;color:var(--sand);letter-spacing:0.05em;">
+        ✓ Message sent. I'll get back to you within 24 hours.
+      </div>
+      <div id="f-error" style="display:none;margin-top:16px;padding:16px 20px;border:1px solid rgba(255,80,80,0.3);background:rgba(255,80,80,0.06);font-size:13px;color:#ff6b6b;letter-spacing:0.05em;">
+        Something went wrong. Please email me directly at contact@jeevankhatri.com
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="f-logo">Jeevan Khatri</div>
+  <ul class="f-links">
+    <li><a href="https://www.instagram.com/jeevan_khatri?igsh=d3VoZnBhOWhybHFp" target="_blank" rel="noopener">Instagram</a></li>
+    <li><a href="#" target="_blank">YouTube</a></li>
+    <li><a href="https://player.beatstars.com/?storeId=149270" target="_blank">BeatStars</a></li>
+    <li><a href="https://open.spotify.com/playlist/5yCSy7e4JVSbQI49L3ISYh" target="_blank">Spotify</a></li>
+  </ul>
+  <div class="f-copy">© 2026 Jeevan Khatri. All rights reserved.</div>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 40); });
+
+  // ── Contact form → Google Sheets ──
+  const SHEET_URL = 'https://script.google.com/macros/s/AKfycbxcL_KOBciPzSKomFLGaLy7XITrint4W_th97YmcZW47QU-aJG5BwEb10E_BPF6lNtJ/exec';
+
+  // ── Desktop BA Slider (3 visible at a time, 2 pages) ──
+  let baDesktopPage = 0;
+  const baDesktopPages = 2;
+
+  function baDesktopGo(page) {
+    baDesktopPage = page;
+    const track = document.getElementById('baDesktopTrack');
+    if (!track) return;
+    // Each card is 1/3 of viewport width of the container
+    const viewport = track.parentElement;
+    const slideWidth = viewport.offsetWidth;
+    track.style.transform = 'translateX(-' + (page * slideWidth) + 'px)';
+    document.querySelectorAll('.ba-desktop-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === page);
+    });
+  }
+
+  function baDesktopNext() {
+    baDesktopGo((baDesktopPage + 1) % baDesktopPages);
+  }
+  function baDesktopPrev() {
+    baDesktopGo((baDesktopPage - 1 + baDesktopPages) % baDesktopPages);
+  }
+
+  const baPrevBtn = document.getElementById('baPrev');
+  const baNextBtn = document.getElementById('baNext');
+  if (baPrevBtn) baPrevBtn.addEventListener('click', baDesktopPrev);
+  if (baNextBtn) baNextBtn.addEventListener('click', baDesktopNext);
+
+  // ── Reel Slider ──
+  let currentSlide = 0;
+  const totalSlides = 6;
+
+  function goToSlide(index) {
+    currentSlide = index;
+    const track = document.getElementById('baSliderTrack');
+    const cardWidth = track.children[0].offsetWidth + 16;
+    track.style.transform = 'translateX(-' + (currentSlide * cardWidth) + 'px)';
+    document.querySelectorAll('.ba-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === currentSlide);
+    });
+  }
+
+  function nextSlide() {
+    goToSlide((currentSlide + 1) % totalSlides);
+  }
+
+  function prevSlide() {
+    goToSlide((currentSlide - 1 + totalSlides) % totalSlides);
+  }
+
+  // Touch swipe support
+  let touchStartX = 0;
+  const slider = document.getElementById('baSlider');
+  if (slider) {
+    slider.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    slider.addEventListener('touchend', e => {
+      const diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) diff > 0 ? nextSlide() : prevSlide();
+    });
+  }
+
+  document.getElementById('f-submit').addEventListener('click', async function() {
+    const name    = document.getElementById('f-name').value.trim();
+    const email   = document.getElementById('f-email').value.trim();
+    const service = document.getElementById('f-service').value;
+    const message = document.getElementById('f-message').value.trim();
+
+    // Basic validation
+    if (!name || !email || !service) {
+      alert('Please fill in your name, email, and select a service.');
+      return;
+    }
+
+    const btn = document.getElementById('f-submit');
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+    btn.style.opacity = '0.6';
+
+    document.getElementById('f-success').style.display = 'none';
+    document.getElementById('f-error').style.display = 'none';
+
+    try {
+      await fetch(SHEET_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, service, message })
+      });
+
+      // no-cors means we can't read the response — assume success if no error thrown
+      document.getElementById('f-success').style.display = 'block';
+      document.getElementById('f-name').value = '';
+      document.getElementById('f-email').value = '';
+      document.getElementById('f-service').value = '';
+      document.getElementById('f-message').value = '';
+      btn.textContent = 'Send Inquiry';
+      btn.disabled = false;
+      btn.style.opacity = '1';
+
+    } catch (err) {
+      document.getElementById('f-error').style.display = 'block';
+      btn.textContent = 'Send Inquiry';
+      btn.disabled = false;
+      btn.style.opacity = '1';
+    }
+  });
+</script>
+</body>
+</html>
