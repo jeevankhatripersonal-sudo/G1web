@@ -5,7 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Jeevan Khatri — Audio Engineer & Music Producer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="image" href="media/front-page.jpeg" fetchpriority="high">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -393,7 +395,8 @@ nav.scrolled { border-bottom-color: rgba(255,255,255,0.07); }
   will-change: transform;
   transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.38s ease;
 }
-.gallery-grid > .g-item { aspect-ratio: 2 / 3; }
+.gallery-grid > .g-item, .gallery-pair .g-item { aspect-ratio: 2 / 3; }
+.gallery-pair { display: contents; }
 .gallery-stack { display: flex; flex-direction: column; }
 .gallery-stack .g-item { flex: 0 0 auto; }
 .g-item img {
@@ -689,9 +692,25 @@ footer { padding: 32px 48px; border-top: 1px solid rgba(255,255,255,0.05); displ
   .about-pull { font-size: 16px; padding-left: 14px; margin: 20px 0; }
 
   /* ── GALLERY ── */
-  .gallery-grid { display: block; }
-  .gallery-grid > .g-item { aspect-ratio: auto; }
-  .gallery-stack { display: block; }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: 1fr 2.25fr;
+    gap: 2px;
+  }
+  .gallery-grid > .g-item, .gallery-pair .g-item { aspect-ratio: 2 / 3; }
+  .gallery-pair {
+    display: grid;
+    order: 1;
+    grid-column: 1 / -1;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2px;
+  }
+  .gallery-grid > .g-item { order: 3; grid-column: 1; }
+  .gallery-stack {
+    display: contents;
+  }
+  .gallery-stack .g-item:nth-child(1) { order: 2; grid-column: 1 / -1; }
+  .gallery-stack .g-item:nth-child(2) { order: 4; grid-column: 2; }
 
   /* ── CONTACT ── */
   .contact-grid { grid-template-columns: 1fr; gap: 36px; }
@@ -703,6 +722,10 @@ footer { padding: 32px 48px; border-top: 1px solid rgba(255,255,255,0.05); displ
   footer { flex-direction: column; align-items: flex-start; gap: 18px; padding: 24px 20px; }
   .f-links { flex-wrap: wrap; gap: 12px; }
   .f-copy { font-size: 10px; }
+}
+@media (hover: none) {
+  .g-item:hover { transform: translate3d(0, 0, 0); box-shadow: none; }
+  .g-item:hover img { opacity: 1; }
 }
 </style>
 </head>
@@ -728,7 +751,7 @@ footer { padding: 32px 48px; border-top: 1px solid rgba(255,255,255,0.05); displ
 <!-- ① HERO — ink bg -->
 <section class="hero bg-ink" id="top" style="margin-bottom:0;">
   <div class="hero-photo">
-    <img src="media/front-page.jpeg" alt="Jeevan Khatri working in his studio" />
+    <img src="media/front-page.jpeg" alt="Jeevan Khatri working in his studio" loading="eager" fetchpriority="high" decoding="async" />
   </div>
   <div class="hero-content">
     <p class="hero-eyebrow">Audio Engineer · Music Producer</p>
@@ -767,32 +790,32 @@ footer { padding: 32px 48px; border-top: 1px solid rgba(255,255,255,0.05); displ
       <div class="ba-grid" id="baDesktopTrack">
         <div class="ba-card">
           <div class="ba-video">
-            <video src="ba1.mp4" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="metadata"></video>
+            <video data-src="ba1.mp4" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="none" class="lazy-video"></video>
           </div>
         </div>
         <div class="ba-card">
           <div class="ba-video">
-            <video src="ba2.mp4" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="metadata"></video>
+            <video data-src="ba2.mp4" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="none" class="lazy-video"></video>
           </div>
         </div>
         <div class="ba-card">
           <div class="ba-video">
-            <video src="ba3.mp4" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="metadata"></video>
+            <video data-src="ba3.mp4" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="none" class="lazy-video"></video>
           </div>
         </div>
         <div class="ba-card">
           <div class="ba-video">
-            <video src="ba4.mp4" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="metadata"></video>
+            <video data-src="ba4.mp4" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="none" class="lazy-video"></video>
           </div>
         </div>
         <div class="ba-card">
           <div class="ba-video">
-            <video src="ba5.mp4" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="metadata"></video>
+            <video data-src="ba5.mp4" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="none" class="lazy-video"></video>
           </div>
         </div>
         <div class="ba-card">
           <div class="ba-video">
-            <video src="ba6.mp4" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="metadata"></video>
+            <video data-src="ba6.mp4" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="none" class="lazy-video"></video>
           </div>
         </div>
       </div>
@@ -810,32 +833,32 @@ footer { padding: 32px 48px; border-top: 1px solid rgba(255,255,255,0.05); displ
     <div class="ba-slider-track" id="baSliderTrack">
       <div class="ba-card">
         <div class="ba-video">
-          <video src="ba1.mp4" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="metadata"></video>
+          <video data-src="ba1.mp4" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="none" class="lazy-video"></video>
         </div>
       </div>
       <div class="ba-card">
         <div class="ba-video">
-          <video src="ba2.mp4" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="metadata"></video>
+          <video data-src="ba2.mp4" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="none" class="lazy-video"></video>
         </div>
       </div>
       <div class="ba-card">
         <div class="ba-video">
-          <video src="ba3.mp4" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="metadata"></video>
+          <video data-src="ba3.mp4" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="none" class="lazy-video"></video>
         </div>
       </div>
       <div class="ba-card">
         <div class="ba-video">
-          <video src="ba4.mp4" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="metadata"></video>
+          <video data-src="ba4.mp4" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="none" class="lazy-video"></video>
         </div>
       </div>
       <div class="ba-card">
         <div class="ba-video">
-          <video src="ba5.mp4" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="metadata"></video>
+          <video data-src="ba5.mp4" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="none" class="lazy-video"></video>
         </div>
       </div>
       <div class="ba-card">
         <div class="ba-video">
-          <video src="ba6.mp4" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="metadata"></video>
+          <video data-src="ba6.mp4" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="none" class="lazy-video"></video>
         </div>
       </div>
     </div>
@@ -871,7 +894,7 @@ footer { padding: 32px 48px; border-top: 1px solid rgba(255,255,255,0.05); displ
 
       <div class="svc">
         <div class="svc-video">
-          <video src="mixing___mastering_preview.mp4" autoplay loop muted playsinline></video>
+          <video data-src="mixing___mastering_preview.mp4" autoplay loop muted playsinline preload="none" class="lazy-autoplay-video"></video>
           <div class="svc-badge-wrap"><span class="svc-badge">Most Popular</span></div>
         </div>
         <div class="svc-body">
@@ -884,7 +907,7 @@ footer { padding: 32px 48px; border-top: 1px solid rgba(255,255,255,0.05); displ
 
       <div class="svc">
         <div class="svc-video">
-          <video src="mastering_preview.mp4" autoplay loop muted playsinline></video>
+          <video data-src="mastering_preview.mp4" autoplay loop muted playsinline preload="none" class="lazy-autoplay-video"></video>
         </div>
         <div class="svc-body">
           <div class="svc-name">Mastering</div>
@@ -896,7 +919,7 @@ footer { padding: 32px 48px; border-top: 1px solid rgba(255,255,255,0.05); displ
 
       <div class="svc">
         <div class="svc-video">
-          <video src="music_production_preview_video.mp4" autoplay loop muted playsinline></video>
+          <video data-src="music_production_preview_video.mp4" autoplay loop muted playsinline preload="none" class="lazy-autoplay-video"></video>
         </div>
         <div class="svc-body">
           <div class="svc-name">Beat Production</div>
@@ -916,7 +939,7 @@ footer { padding: 32px 48px; border-top: 1px solid rgba(255,255,255,0.05); displ
 
       <div class="svc">
         <div class="svc-video">
-          <video src="mentorship_preview_video.mp4" autoplay loop muted playsinline></video>
+          <video data-src="mentorship_preview_video.mp4" autoplay loop muted playsinline preload="none" class="lazy-autoplay-video"></video>
           <div class="svc-badge-wrap"><span class="svc-badge">Now Available</span></div>
         </div>
         <div class="svc-body">
@@ -929,7 +952,7 @@ footer { padding: 32px 48px; border-top: 1px solid rgba(255,255,255,0.05); displ
 
       <div class="svc">
         <div class="svc-video">
-          <video src="learn_mixing_and_mastering_preview.mp4" autoplay loop muted playsinline></video>
+          <video data-src="learn_mixing_and_mastering_preview.mp4" autoplay loop muted playsinline preload="none" class="lazy-autoplay-video"></video>
         </div>
         <div class="svc-body">
           <div class="svc-name">Learn Mixing & Mastering</div>
@@ -941,7 +964,7 @@ footer { padding: 32px 48px; border-top: 1px solid rgba(255,255,255,0.05); displ
 
       <div class="svc">
         <div class="svc-video">
-          <video src="learn_music_production_preview_video.mp4" autoplay loop muted playsinline></video>
+          <video data-src="learn_music_production_preview_video.mp4" autoplay loop muted playsinline preload="none" class="lazy-autoplay-video"></video>
         </div>
         <div class="svc-body">
           <div class="svc-name">Learn Music Production</div>
@@ -965,7 +988,7 @@ footer { padding: 32px 48px; border-top: 1px solid rgba(255,255,255,0.05); displ
     <div class="reviews-track">
       <div class="review-card">
         <div class="review-photo">
-          <img src="r1.jpg" alt="Lo" />
+          <img src="r1.jpg" alt="Lo" loading="lazy" decoding="async" />
         </div>
         <div class="review-body">
           <div class="review-name">Lo</div>
@@ -985,7 +1008,7 @@ footer { padding: 32px 48px; border-top: 1px solid rgba(255,255,255,0.05); displ
       </div>
       <div class="review-card">
         <div class="review-photo">
-          <img src="r2.jpg" alt="J Krish" />
+          <img src="r2.jpg" alt="J Krish" loading="lazy" decoding="async" />
         </div>
         <div class="review-body">
           <div class="review-name">J Krish</div>
@@ -1005,7 +1028,7 @@ footer { padding: 32px 48px; border-top: 1px solid rgba(255,255,255,0.05); displ
       </div>
       <div class="review-card">
         <div class="review-photo">
-          <img src="r3.jpg" alt="ZAAI" style="transform:scale(1.25);transform-origin:center top;" />
+          <img src="r3.jpg" alt="ZAAI" style="transform:scale(1.25);transform-origin:center top;" loading="lazy" decoding="async" />
         </div>
         <div class="review-body">
           <div class="review-name">ZAAI</div>
@@ -1025,7 +1048,7 @@ footer { padding: 32px 48px; border-top: 1px solid rgba(255,255,255,0.05); displ
       </div>
       <div class="review-card">
         <div class="review-photo">
-          <img src="r4.jpg" alt="Rang" />
+          <img src="r4.jpg" alt="Rang" loading="lazy" decoding="async" />
         </div>
         <div class="review-body">
           <div class="review-name">Rang</div>
@@ -1045,7 +1068,7 @@ footer { padding: 32px 48px; border-top: 1px solid rgba(255,255,255,0.05); displ
       </div>
       <div class="review-card">
         <div class="review-photo">
-          <img src="r5.jpg" alt="LAI" />
+          <img src="r5.jpg" alt="LAI" loading="lazy" decoding="async" />
         </div>
         <div class="review-body">
           <div class="review-name">LAI</div>
@@ -1065,7 +1088,7 @@ footer { padding: 32px 48px; border-top: 1px solid rgba(255,255,255,0.05); displ
       </div>
       <div class="review-card">
         <div class="review-photo">
-          <img src="r6.jpg" alt="Seth Panda" />
+          <img src="r6.jpg" alt="Seth Panda" loading="lazy" decoding="async" />
         </div>
         <div class="review-body">
           <div class="review-name">Seth Panda</div>
@@ -1085,7 +1108,7 @@ footer { padding: 32px 48px; border-top: 1px solid rgba(255,255,255,0.05); displ
       </div>
       <div class="review-card">
         <div class="review-photo">
-          <img src="r7.jpg" alt="lil.Beelzebub" />
+          <img src="r7.jpg" alt="lil.Beelzebub" loading="lazy" decoding="async" />
         </div>
         <div class="review-body">
           <div class="review-name">lil.Beelzebub</div>
@@ -1105,7 +1128,7 @@ footer { padding: 32px 48px; border-top: 1px solid rgba(255,255,255,0.05); displ
       </div>
       <div class="review-card">
         <div class="review-photo">
-          <img src="r8.jpg" alt="Karshee" />
+          <img src="r8.jpg" alt="Karshee" loading="lazy" decoding="async" />
         </div>
         <div class="review-body">
           <div class="review-name">Karshee</div>
@@ -1125,7 +1148,7 @@ footer { padding: 32px 48px; border-top: 1px solid rgba(255,255,255,0.05); displ
       </div>
       <div class="review-card">
         <div class="review-photo">
-          <img src="r9.jpg" alt="Prozach" />
+          <img src="r9.jpg" alt="Prozach" loading="lazy" decoding="async" />
         </div>
         <div class="review-body">
           <div class="review-name">Prozach</div>
@@ -1145,7 +1168,7 @@ footer { padding: 32px 48px; border-top: 1px solid rgba(255,255,255,0.05); displ
       </div>
       <div class="review-card">
         <div class="review-photo">
-          <img src="r10.jpg" alt="EBZZ" />
+          <img src="r10.jpg" alt="EBZZ" loading="lazy" decoding="async" />
         </div>
         <div class="review-body">
           <div class="review-name">EBZZ</div>
@@ -1166,7 +1189,7 @@ footer { padding: 32px 48px; border-top: 1px solid rgba(255,255,255,0.05); displ
       
       <div class="review-card">
         <div class="review-photo">
-          <img src="r11.jpg" alt="Zeef" />
+          <img src="r11.jpg" alt="Zeef" loading="lazy" decoding="async" />
         </div>
         <div class="review-body">
           <div class="review-name">Zeef</div>
@@ -1186,7 +1209,7 @@ footer { padding: 32px 48px; border-top: 1px solid rgba(255,255,255,0.05); displ
       </div>
       <div class="review-card">
         <div class="review-photo">
-          <img src="r1.jpg" alt="Lo" />
+          <img src="r1.jpg" alt="Lo" loading="lazy" decoding="async" />
         </div>
         <div class="review-body">
           <div class="review-name">Lo</div>
@@ -1206,7 +1229,7 @@ footer { padding: 32px 48px; border-top: 1px solid rgba(255,255,255,0.05); displ
       </div>
       <div class="review-card">
         <div class="review-photo">
-          <img src="r2.jpg" alt="J Krish" />
+          <img src="r2.jpg" alt="J Krish" loading="lazy" decoding="async" />
         </div>
         <div class="review-body">
           <div class="review-name">J Krish</div>
@@ -1226,7 +1249,7 @@ footer { padding: 32px 48px; border-top: 1px solid rgba(255,255,255,0.05); displ
       </div>
       <div class="review-card">
         <div class="review-photo">
-          <img src="r3.jpg" alt="ZAAI" style="transform:scale(1.25);transform-origin:center top;" />
+          <img src="r3.jpg" alt="ZAAI" style="transform:scale(1.25);transform-origin:center top;" loading="lazy" decoding="async" />
         </div>
         <div class="review-body">
           <div class="review-name">ZAAI</div>
@@ -1246,7 +1269,7 @@ footer { padding: 32px 48px; border-top: 1px solid rgba(255,255,255,0.05); displ
       </div>
       <div class="review-card">
         <div class="review-photo">
-          <img src="r4.jpg" alt="Rang" />
+          <img src="r4.jpg" alt="Rang" loading="lazy" decoding="async" />
         </div>
         <div class="review-body">
           <div class="review-name">Rang</div>
@@ -1266,7 +1289,7 @@ footer { padding: 32px 48px; border-top: 1px solid rgba(255,255,255,0.05); displ
       </div>
       <div class="review-card">
         <div class="review-photo">
-          <img src="r5.jpg" alt="LAI" />
+          <img src="r5.jpg" alt="LAI" loading="lazy" decoding="async" />
         </div>
         <div class="review-body">
           <div class="review-name">LAI</div>
@@ -1286,7 +1309,7 @@ footer { padding: 32px 48px; border-top: 1px solid rgba(255,255,255,0.05); displ
       </div>
       <div class="review-card">
         <div class="review-photo">
-          <img src="r6.jpg" alt="Seth Panda" />
+          <img src="r6.jpg" alt="Seth Panda" loading="lazy" decoding="async" />
         </div>
         <div class="review-body">
           <div class="review-name">Seth Panda</div>
@@ -1306,7 +1329,7 @@ footer { padding: 32px 48px; border-top: 1px solid rgba(255,255,255,0.05); displ
       </div>
       <div class="review-card">
         <div class="review-photo">
-          <img src="r7.jpg" alt="lil.Beelzebub" />
+          <img src="r7.jpg" alt="lil.Beelzebub" loading="lazy" decoding="async" />
         </div>
         <div class="review-body">
           <div class="review-name">lil.Beelzebub</div>
@@ -1326,7 +1349,7 @@ footer { padding: 32px 48px; border-top: 1px solid rgba(255,255,255,0.05); displ
       </div>
       <div class="review-card">
         <div class="review-photo">
-          <img src="r8.jpg" alt="Karshee" />
+          <img src="r8.jpg" alt="Karshee" loading="lazy" decoding="async" />
         </div>
         <div class="review-body">
           <div class="review-name">Karshee</div>
@@ -1346,7 +1369,7 @@ footer { padding: 32px 48px; border-top: 1px solid rgba(255,255,255,0.05); displ
       </div>
       <div class="review-card">
         <div class="review-photo">
-          <img src="r9.jpg" alt="Prozach" />
+          <img src="r9.jpg" alt="Prozach" loading="lazy" decoding="async" />
         </div>
         <div class="review-body">
           <div class="review-name">Prozach</div>
@@ -1366,7 +1389,7 @@ footer { padding: 32px 48px; border-top: 1px solid rgba(255,255,255,0.05); displ
       </div>
       <div class="review-card">
         <div class="review-photo">
-          <img src="r10.jpg" alt="EBZZ" />
+          <img src="r10.jpg" alt="EBZZ" loading="lazy" decoding="async" />
         </div>
         <div class="review-body">
           <div class="review-name">EBZZ</div>
@@ -1387,7 +1410,7 @@ footer { padding: 32px 48px; border-top: 1px solid rgba(255,255,255,0.05); displ
       
       <div class="review-card">
         <div class="review-photo">
-          <img src="r11.jpg" alt="Zeef" />
+          <img src="r11.jpg" alt="Zeef" loading="lazy" decoding="async" />
         </div>
         <div class="review-body">
           <div class="review-name">Zeef</div>
@@ -1429,7 +1452,7 @@ footer { padding: 32px 48px; border-top: 1px solid rgba(255,255,255,0.05); displ
     </div>
     <div class="about-photo-wrap">
       <div class="about-photo">
-        <img src="media/about-portrait-cropped.jpeg" alt="Portrait of Jeevan Khatri" />
+        <img src="media/about-portrait-cropped.jpeg" alt="Portrait of Jeevan Khatri" loading="lazy" decoding="async" />
       </div>
     </div>
   </div>
@@ -1443,12 +1466,14 @@ footer { padding: 32px 48px; border-top: 1px solid rgba(255,255,255,0.05); displ
     <p class="section-sub center">Where the magic happens.</p>
   </div>
   <div class="gallery-grid">
-    <div class="g-item"><img src="media/studio-1.jpeg" alt="Jeevan Khatri producing music in the studio" /></div>
-    <div class="g-item"><img src="media/studio-2.jpeg" alt="Jeevan Khatri at his production desk" /></div>
-    <div class="g-item"><img src="media/studio-4.jpeg" alt="Jeevan Khatri playing keys in the studio" /></div>
+    <div class="gallery-pair">
+      <div class="g-item"><img src="media/studio-1.jpeg" alt="" loading="lazy" decoding="async" /></div>
+      <div class="g-item"><img src="media/studio-2.jpeg" alt="" loading="lazy" decoding="async" /></div>
+    </div>
+    <div class="g-item"><img src="media/studio-4.jpeg" alt="" loading="lazy" decoding="async" /></div>
     <div class="gallery-stack">
-      <div class="g-item"><img src="media/studio-3.jpeg" alt="Overhead view of the studio setup" /></div>
-      <div class="g-item"><img src="media/studio-5.jpeg" alt="Jeevan Khatri playing guitar" /></div>
+      <div class="g-item"><img src="media/studio-3.jpeg" alt="" loading="lazy" decoding="async" /></div>
+      <div class="g-item"><img src="media/studio-5.jpeg" alt="" loading="lazy" decoding="async" /></div>
     </div>
   </div>
 </section>
@@ -1470,7 +1495,7 @@ footer { padding: 32px 48px; border-top: 1px solid rgba(255,255,255,0.05); displ
       <span style="font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);border:1px solid var(--ash);padding:7px 16px;">Exclusive Available</span>
       <span style="font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);border:1px solid var(--ash);padding:7px 16px;">Trackouts Included</span>
     </div>
-    <iframe src="https://player.beatstars.com/?storeId=149270" width="100%" height="880" style="border:none;display:block;"></iframe>
+    <iframe src="https://player.beatstars.com/?storeId=149270" width="100%" height="880" style="border:none;display:block;" loading="lazy" title="BeatStars beat store"></iframe>
   </div>
 </section>
 
@@ -1552,6 +1577,45 @@ footer { padding: 32px 48px; border-top: 1px solid rgba(255,255,255,0.05); displ
 <script>
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 40); });
+
+  // ── Lazy media loading ──
+  // "Before & After" clips: only fetch metadata once a card nears the viewport.
+  // (Hidden desktop/mobile duplicate never intersects, so it never loads at all.)
+  const lazyVideos = document.querySelectorAll('video.lazy-video[data-src]');
+  // Silent looping service preview clips: only fetch + play while actually visible.
+  const autoVideos = document.querySelectorAll('video.lazy-autoplay-video[data-src]');
+
+  if ('IntersectionObserver' in window) {
+    const videoIO = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const v = entry.target;
+          v.preload = 'metadata'; // fetch poster frame + duration once it's actually near view
+          v.src = v.dataset.src;
+          v.removeAttribute('data-src');
+          obs.unobserve(v);
+        }
+      });
+    }, { rootMargin: '400px 0px' });
+    lazyVideos.forEach(v => videoIO.observe(v));
+
+    const autoIO = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const v = entry.target;
+        if (entry.isIntersecting) {
+          if (!v.src) v.src = v.dataset.src;
+          v.play().catch(() => {});
+        } else if (v.src) {
+          v.pause();
+        }
+      });
+    }, { rootMargin: '200px 0px', threshold: 0.2 });
+    autoVideos.forEach(v => autoIO.observe(v));
+  } else {
+    // Fallback for browsers without IntersectionObserver support
+    lazyVideos.forEach(v => { v.preload = 'metadata'; v.src = v.dataset.src; });
+    autoVideos.forEach(v => { v.src = v.dataset.src; v.play().catch(() => {}); });
+  }
 
   // ── Contact form → Google Sheets ──
   const SHEET_URL = 'https://script.google.com/macros/s/AKfycbxcL_KOBciPzSKomFLGaLy7XITrint4W_th97YmcZW47QU-aJG5BwEb10E_BPF6lNtJ/exec';
