@@ -727,6 +727,20 @@ footer { padding: 32px 48px; border-top: 1px solid rgba(255,255,255,0.05); displ
   .g-item:hover { transform: translate3d(0, 0, 0); box-shadow: none; }
   .g-item:hover img { opacity: 1; }
 }
+
+/* -- Smooth lazy embeds (added by optimize_embeds.py) -- */
+.embed { position:relative; width:100%; border-radius:4px; overflow:hidden; background:var(--ash); cursor:pointer; }
+.embed::before {
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+  transform:translateX(-100%); animation:embedShimmer 1.6s ease-in-out infinite;
+}
+.embed.is-loaded { cursor:default; }
+.embed.is-loaded::before { display:none; }
+.embed iframe { position:absolute; inset:0; width:100%; height:100%; border:0; opacity:0; transition:opacity .5s ease; }
+.embed.is-loaded iframe { opacity:1; }
+@keyframes embedShimmer { to { transform:translateX(100%); } }
+@media (prefers-reduced-motion: reduce) { .embed::before { animation:none; } .embed iframe { transition:none; } }
 </style>
 </head>
 <body>
@@ -776,7 +790,10 @@ footer { padding: 32px 48px; border-top: 1px solid rgba(255,255,255,0.05); displ
   <h2 class="section-heading center">Tracks I've <span class="serif">engineered</span></h2>
   <p class="section-sub center">Every track below passed through my hands — mixed, mastered, or produced from scratch. This is the work.</p>
   <div style="max-width:95%;margin:0 auto;">
-    <iframe data-testid="embed-iframe" style="border-radius:4px;display:block;" src="https://open.spotify.com/embed/playlist/5yCSy7e4JVSbQI49L3ISYh?utm_source=generator&si=37c0d732a4124c1e" width="100%" height="576" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    <div class="embed" style="height:576px"
+  data-title="Spotify playlist"
+  data-src="https://open.spotify.com/embed/playlist/5yCSy7e4JVSbQI49L3ISYh?utm_source=generator&si=37c0d732a4124c1e"
+  data-allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"><noscript><iframe data-testid="embed-iframe" style="border-radius:4px;display:block;" src="https://open.spotify.com/embed/playlist/5yCSy7e4JVSbQI49L3ISYh?utm_source=generator&si=37c0d732a4124c1e" width="100%" height="576" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></noscript></div>
   </div>
 </section>
 
@@ -790,32 +807,32 @@ footer { padding: 32px 48px; border-top: 1px solid rgba(255,255,255,0.05); displ
       <div class="ba-grid" id="baDesktopTrack">
         <div class="ba-card">
           <div class="ba-video">
-            <video data-src="ba1.mp4" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="none" class="lazy-video"></video>
+            <video data-src="ba1.mp4" data-poster="ba1.webp" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="none" class="lazy-video"></video>
           </div>
         </div>
         <div class="ba-card">
           <div class="ba-video">
-            <video data-src="ba2.mp4" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="none" class="lazy-video"></video>
+            <video data-src="ba2.mp4" data-poster="ba2.webp" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="none" class="lazy-video"></video>
           </div>
         </div>
         <div class="ba-card">
           <div class="ba-video">
-            <video data-src="ba3.mp4" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="none" class="lazy-video"></video>
+            <video data-src="ba3.mp4" data-poster="ba3.webp" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="none" class="lazy-video"></video>
           </div>
         </div>
         <div class="ba-card">
           <div class="ba-video">
-            <video data-src="ba4.mp4" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="none" class="lazy-video"></video>
+            <video data-src="ba4.mp4" data-poster="ba4.webp" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="none" class="lazy-video"></video>
           </div>
         </div>
         <div class="ba-card">
           <div class="ba-video">
-            <video data-src="ba5.mp4" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="none" class="lazy-video"></video>
+            <video data-src="ba5.mp4" data-poster="ba5.webp" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="none" class="lazy-video"></video>
           </div>
         </div>
         <div class="ba-card">
           <div class="ba-video">
-            <video data-src="ba6.mp4" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="none" class="lazy-video"></video>
+            <video data-src="ba6.mp4" data-poster="ba6.webp" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="none" class="lazy-video"></video>
           </div>
         </div>
       </div>
@@ -833,32 +850,32 @@ footer { padding: 32px 48px; border-top: 1px solid rgba(255,255,255,0.05); displ
     <div class="ba-slider-track" id="baSliderTrack">
       <div class="ba-card">
         <div class="ba-video">
-          <video data-src="ba1.mp4" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="none" class="lazy-video"></video>
+          <video data-src="ba1.mp4" data-poster="ba1.webp" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="none" class="lazy-video"></video>
         </div>
       </div>
       <div class="ba-card">
         <div class="ba-video">
-          <video data-src="ba2.mp4" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="none" class="lazy-video"></video>
+          <video data-src="ba2.mp4" data-poster="ba2.webp" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="none" class="lazy-video"></video>
         </div>
       </div>
       <div class="ba-card">
         <div class="ba-video">
-          <video data-src="ba3.mp4" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="none" class="lazy-video"></video>
+          <video data-src="ba3.mp4" data-poster="ba3.webp" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="none" class="lazy-video"></video>
         </div>
       </div>
       <div class="ba-card">
         <div class="ba-video">
-          <video data-src="ba4.mp4" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="none" class="lazy-video"></video>
+          <video data-src="ba4.mp4" data-poster="ba4.webp" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="none" class="lazy-video"></video>
         </div>
       </div>
       <div class="ba-card">
         <div class="ba-video">
-          <video data-src="ba5.mp4" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="none" class="lazy-video"></video>
+          <video data-src="ba5.mp4" data-poster="ba5.webp" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="none" class="lazy-video"></video>
         </div>
       </div>
       <div class="ba-card">
         <div class="ba-video">
-          <video data-src="ba6.mp4" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="none" class="lazy-video"></video>
+          <video data-src="ba6.mp4" data-poster="ba6.webp" style="width:100%;height:100%;object-fit:cover;display:block;" controls playsinline preload="none" class="lazy-video"></video>
         </div>
       </div>
     </div>
@@ -894,7 +911,7 @@ footer { padding: 32px 48px; border-top: 1px solid rgba(255,255,255,0.05); displ
 
       <div class="svc">
         <div class="svc-video">
-          <video data-src="mixing___mastering_preview.mp4" autoplay loop muted playsinline preload="none" class="lazy-autoplay-video"></video>
+          <video data-src="mixing___mastering_preview.mp4" data-poster="mixing___mastering_preview.webp" autoplay loop muted playsinline preload="none" class="lazy-autoplay-video"></video>
           <div class="svc-badge-wrap"><span class="svc-badge">Most Popular</span></div>
         </div>
         <div class="svc-body">
@@ -907,7 +924,7 @@ footer { padding: 32px 48px; border-top: 1px solid rgba(255,255,255,0.05); displ
 
       <div class="svc">
         <div class="svc-video">
-          <video data-src="mastering_preview.mp4" autoplay loop muted playsinline preload="none" class="lazy-autoplay-video"></video>
+          <video data-src="mastering_preview.mp4" data-poster="mastering_preview.webp" autoplay loop muted playsinline preload="none" class="lazy-autoplay-video"></video>
         </div>
         <div class="svc-body">
           <div class="svc-name">Mastering</div>
@@ -919,7 +936,7 @@ footer { padding: 32px 48px; border-top: 1px solid rgba(255,255,255,0.05); displ
 
       <div class="svc">
         <div class="svc-video">
-          <video data-src="music_production_preview_video.mp4" autoplay loop muted playsinline preload="none" class="lazy-autoplay-video"></video>
+          <video data-src="music_production_preview_video.mp4" data-poster="music_production_preview_video.webp" autoplay loop muted playsinline preload="none" class="lazy-autoplay-video"></video>
         </div>
         <div class="svc-body">
           <div class="svc-name">Beat Production</div>
@@ -939,7 +956,7 @@ footer { padding: 32px 48px; border-top: 1px solid rgba(255,255,255,0.05); displ
 
       <div class="svc">
         <div class="svc-video">
-          <video data-src="mentorship_preview_video.mp4" autoplay loop muted playsinline preload="none" class="lazy-autoplay-video"></video>
+          <video data-src="mentorship_preview_video.mp4" data-poster="mentorship_preview_video.webp" autoplay loop muted playsinline preload="none" class="lazy-autoplay-video"></video>
           <div class="svc-badge-wrap"><span class="svc-badge">Now Available</span></div>
         </div>
         <div class="svc-body">
@@ -952,7 +969,7 @@ footer { padding: 32px 48px; border-top: 1px solid rgba(255,255,255,0.05); displ
 
       <div class="svc">
         <div class="svc-video">
-          <video data-src="learn_mixing_and_mastering_preview.mp4" autoplay loop muted playsinline preload="none" class="lazy-autoplay-video"></video>
+          <video data-src="learn_mixing_and_mastering_preview.mp4" data-poster="learn_mixing_and_mastering_preview.webp" autoplay loop muted playsinline preload="none" class="lazy-autoplay-video"></video>
         </div>
         <div class="svc-body">
           <div class="svc-name">Learn Mixing & Mastering</div>
@@ -964,7 +981,7 @@ footer { padding: 32px 48px; border-top: 1px solid rgba(255,255,255,0.05); displ
 
       <div class="svc">
         <div class="svc-video">
-          <video data-src="learn_music_production_preview_video.mp4" autoplay loop muted playsinline preload="none" class="lazy-autoplay-video"></video>
+          <video data-src="learn_music_production_preview_video.mp4" data-poster="learn_music_production_preview_video.webp" autoplay loop muted playsinline preload="none" class="lazy-autoplay-video"></video>
         </div>
         <div class="svc-body">
           <div class="svc-name">Learn Music Production</div>
@@ -1495,7 +1512,9 @@ footer { padding: 32px 48px; border-top: 1px solid rgba(255,255,255,0.05); displ
       <span style="font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);border:1px solid var(--ash);padding:7px 16px;">Exclusive Available</span>
       <span style="font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);border:1px solid var(--ash);padding:7px 16px;">Trackouts Included</span>
     </div>
-    <iframe src="https://player.beatstars.com/?storeId=149270" width="100%" height="880" style="border:none;display:block;" loading="lazy" title="BeatStars beat store"></iframe>
+    <div class="embed" style="height:880px"
+  data-title="BeatStars beat store"
+  data-src="https://player.beatstars.com/?storeId=149270"><noscript><iframe src="https://player.beatstars.com/?storeId=149270" width="100%" height="880" style="border:none;display:block;" loading="lazy" title="BeatStars beat store"></iframe></noscript></div>
   </div>
 </section>
 
@@ -1545,6 +1564,7 @@ footer { padding: 32px 48px; border-top: 1px solid rgba(255,255,255,0.05); displ
       <div class="field">
         <label class="f-label">Tell me about your project</label>
         <textarea class="f-input" id="f-message" placeholder="Genre, references, deadline, any details that help..."></textarea>
+        <input type="text" id="f-website" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
       </div>
 
       <!-- Submit button -->
@@ -1617,8 +1637,6 @@ footer { padding: 32px 48px; border-top: 1px solid rgba(255,255,255,0.05); displ
     autoVideos.forEach(v => { v.src = v.dataset.src; v.play().catch(() => {}); });
   }
 
-  // ── Contact form → Google Sheets ──
-  const SHEET_URL = 'https://script.google.com/macros/s/AKfycbxcL_KOBciPzSKomFLGaLy7XITrint4W_th97YmcZW47QU-aJG5BwEb10E_BPF6lNtJ/exec';
 
   // ── Desktop BA Slider (3 visible at a time, 2 pages) ──
   let baDesktopPage = 0;
@@ -1687,46 +1705,91 @@ footer { padding: 32px 48px; border-top: 1px solid rgba(255,255,255,0.05); displ
     const email   = document.getElementById('f-email').value.trim();
     const service = document.getElementById('f-service').value;
     const message = document.getElementById('f-message').value.trim();
+    const hp      = document.getElementById('f-website');
+    const website = hp ? hp.value : '';
 
-    // Basic validation
     if (!name || !email || !service) {
       alert('Please fill in your name, email, and select a service.');
       return;
     }
 
     const btn = document.getElementById('f-submit');
+    const ok  = document.getElementById('f-success');
+    const bad = document.getElementById('f-error');
     btn.textContent = 'Sending...';
     btn.disabled = true;
     btn.style.opacity = '0.6';
-
-    document.getElementById('f-success').style.display = 'none';
-    document.getElementById('f-error').style.display = 'none';
+    ok.style.display = 'none';
+    bad.style.display = 'none';
 
     try {
-      await fetch(SHEET_URL, {
+      const res = await fetch('/api/contact', {
         method: 'POST',
-        mode: 'no-cors',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, service, message })
+        body: JSON.stringify({ name, email, service, message, website })
       });
+      if (!res.ok) throw new Error('Server responded ' + res.status);
 
-      // no-cors means we can't read the response — assume success if no error thrown
-      document.getElementById('f-success').style.display = 'block';
-      document.getElementById('f-name').value = '';
-      document.getElementById('f-email').value = '';
-      document.getElementById('f-service').value = '';
-      document.getElementById('f-message').value = '';
-      btn.textContent = 'Send Inquiry';
-      btn.disabled = false;
-      btn.style.opacity = '1';
-
+      ok.style.display = 'block';
+      ['f-name', 'f-email', 'f-service', 'f-message'].forEach(id => { document.getElementById(id).value = ''; });
     } catch (err) {
-      document.getElementById('f-error').style.display = 'block';
+      console.error(err);
+      bad.style.display = 'block';
+    } finally {
       btn.textContent = 'Send Inquiry';
       btn.disabled = false;
       btn.style.opacity = '1';
     }
   });
+
+// -- Lazy video posters (added by optimize_videos.py) --
+(function () {
+  const vids = document.querySelectorAll('video[data-poster]');
+  const setPoster = v => { if (!v.poster) v.poster = v.dataset.poster; };
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries, obs) => {
+      entries.forEach(e => { if (e.isIntersecting) { setPoster(e.target); obs.unobserve(e.target); } });
+    }, { rootMargin: '600px 0px' });
+    vids.forEach(v => io.observe(v));
+  } else {
+    vids.forEach(setPoster);
+  }
+})();
+
+// -- Smooth lazy embeds (added by optimize_embeds.py) --
+(function () {
+  const embeds = document.querySelectorAll('.embed[data-src]');
+  if (!embeds.length) return;
+
+  function loadEmbed(el) {
+    if (el.dataset.loaded) return;
+    el.dataset.loaded = '1';
+    const f = document.createElement('iframe');
+    f.src = el.dataset.src;
+    f.title = el.dataset.title || '';
+    if (el.dataset.allow) f.allow = el.dataset.allow;
+    f.setAttribute('allowfullscreen', '');
+    f.onload = () => el.classList.add('is-loaded');
+    setTimeout(() => el.classList.add('is-loaded'), 8000); // never leave it hidden
+    el.appendChild(f);
+  }
+
+  embeds.forEach(el => el.addEventListener('click', () => loadEmbed(el), { once: true }));
+
+  function start() {
+    if (!('IntersectionObserver' in window)) { embeds.forEach(loadEmbed); return; }
+    const io = new IntersectionObserver((entries, obs) => {
+      entries.forEach(e => { if (e.isIntersecting) { loadEmbed(e.target); obs.unobserve(e.target); } });
+    }, { rootMargin: '600px 0px' });
+    embeds.forEach(el => io.observe(el));
+  }
+
+  const kick = () => ('requestIdleCallback' in window)
+    ? requestIdleCallback(start, { timeout: 2000 })
+    : setTimeout(start, 1200);
+  if (document.readyState === 'complete') kick();
+  else window.addEventListener('load', kick);
+})();
 </script>
 </body>
 </html>
