@@ -10,73 +10,75 @@ import { timingSafeEqual, createHash } from 'node:crypto';
 const NO_CACHE = { 'Cache-Control': 'private, no-store', 'X-Robots-Tag': 'noindex' };
 
 function authorized(request) {
-  const expected = process.env.ADMIN_PASSWORD;
-  if (!expected) return false;
-  const header = request.headers.get('authorization') || '';
-  if (!header.startsWith('Basic ')) return false;
-  const decoded = Buffer.from(header.slice(6), 'base64').toString();
-  const password = decoded.slice(decoded.indexOf(':') + 1);
-  const a = createHash('sha256').update(password).digest();
-  const b = createHash('sha256').update(expected).digest();
-  return timingSafeEqual(a, b);
+    const expected = process.env.ADMIN_PASSWORD;
+    if (!expected) return false;
+    const header = request.headers.get('authorization') || '';
+    if (!header.startsWith('Basic ')) return false;
+    const decoded = Buffer.from(header.slice(6), 'base64').toString();
+    const password = decoded.slice(decoded.indexOf(':') + 1);
+    const a = createHash('sha256').update(password).digest();
+    const b = createHash('sha256').update(expected).digest();
+    return timingSafeEqual(a, b);
 }
 
 async function loadAll() {
-  const blobs = [];
-  let cursor;
-  do {
-    const page = await list({ prefix: 'submissions/', cursor, limit: 1000 });
-    blobs.push(...page.blobs);
-    cursor = page.hasMore ? page.cursor : undefined;
-  } while (cursor);
+    const blobs = [];
+    let cursor;
+    do {
+        const page = await list({ prefix: 'submissions/', cursor, limit: 1000 });
+        blobs.push(...page.blobs);
+        cursor = page.hasMore ? page.cursor : undefined;
+    } while (cursor);
 
-  const records = await Promise.all(
-    blobs.map(async b => {
-      try {
-        const res = await get(b.pathname, { access: 'private' });
-        if (res?.statusCode !== 200) return null;
-        return await new Response(res.stream).json();
-      } catch {
-        return null;
-      }
-    })
-  );
-  return records.filter(Boolean).sort((x, y) => (x.receivedAt < y.receivedAt ? 1 : -1));
+    const records = await Promise.all(
+        blobs.map(async b => {
+            try {
+                const res = await get(b.pathname, { access: 'private' });
+                if (res?.statusCode !== 200) return null;
+                return await new Response(res.stream).json();
+            } catch {
+                return null;
+            }
+        })
+    );
+    return records.filter(Boolean).sort((x, y) => (x.receivedAt < y.receivedAt ? 1 : -1));
 }
 
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const csvCell = s => `"${String(s ?? '').replace(/"/g, '""')}"`;
 
-export default async function handler(request) {
-  if (!process.env.ADMIN_PASSWORD) {
-    return new Response('Set ADMIN_PASSWORD in Vercel > Settings > Environment Variables, then redeploy.', { status: 500, headers: NO_CACHE });
-  }
-  if (!authorized(request)) {
-    return new Response('Login required', {
-      status: 401,
-      headers: { ...NO_CACHE, 'WWW-Authenticate': 'Basic realm="Inquiries", charset="UTF-8"' },
-    });
-  }
+async function handler(request) {
+    if (!process.env.ADMIN_PASSWORD) {
+        return new Response('Set ADMIN_PASSWORD in Vercel > Settings > Environment Variables, then redeploy.', { status: 500, headers: NO_CACHE });
+    }
+    if (!authorized(request)) {
+        return new Response('Login required', {
+            status: 401,
+            headers: {...NO_CACHE, 'WWW-Authenticate': 'Basic realm="Inquiries", charset="UTF-8"' },
+        });
+    }
 
-  const records = await loadAll();
-  const format = new URL(request.url).searchParams.get('format');
+    const records = await loadAll();
+    const format = new URL(request.url).searchParams.get('format');
 
-  if (format === 'csv') {
-    const rows = [['Received', 'Name', 'Email', 'Service', 'Message']].concat(
-      records.map(r => [r.receivedAt, r.name, r.email, r.service, r.message])
-    );
-    const csv = '\uFEFF' + rows.map(row => row.map(csvCell).join(',')).join('\r\n');
-    return new Response(csv, {
-      headers: {
-        ...NO_CACHE,
-        'Content-Type': 'text/csv; charset=utf-8',
-        'Content-Disposition': `attachment; filename="inquiries-${new Date().toISOString().slice(0, 10)}.csv"`,
-      },
-    });
-  }
+    if (format === 'csv') {
+        const rows = [
+            ['Received', 'Name', 'Email', 'Service', 'Message']
+        ].concat(
+            records.map(r => [r.receivedAt, r.name, r.email, r.service, r.message])
+        );
+        const csv = '\uFEFF' + rows.map(row => row.map(csvCell).join(',')).join('\r\n');
+        return new Response(csv, {
+            headers: {
+                ...NO_CACHE,
+                'Content-Type': 'text/csv; charset=utf-8',
+                'Content-Disposition': `attachment; filename="inquiries-${new Date().toISOString().slice(0, 10)}.csv"`,
+            },
+        });
+    }
 
-  const fmt = iso => new Date(iso).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', dateStyle: 'medium', timeStyle: 'short' });
-  const rows = records.map(r => `
+    const fmt = iso => new Date(iso).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', dateStyle: 'medium', timeStyle: 'short' });
+    const rows = records.map(r => `
     <tr>
       <td class="nowrap">${esc(fmt(r.receivedAt))}</td>
       <td>${esc(r.name)}</td>
@@ -85,7 +87,7 @@ export default async function handler(request) {
       <td class="msg">${esc(r.message)}</td>
     </tr>`).join('');
 
-  const page = `<!doctype html>
+    const page = `<!doctype html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
@@ -116,3 +118,6 @@ export default async function handler(request) {
 
   return new Response(page, { headers: { ...NO_CACHE, 'Content-Type': 'text/html; charset=utf-8' } });
 }
+
+// Vercel Node.js runtime: web-standard handlers must be exported as { fetch }
+export default { fetch: handler };
